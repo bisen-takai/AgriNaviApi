@@ -4,7 +4,7 @@ using AgriNaviApi.Application.Requests.Colors;
 namespace AgriNaviApi.Application.Interfaces
 {
     /// <summary>
-    /// カラーテーブルに関するサービス処理
+    /// カラーテーブルに関するサービス処理のインタフェース
     /// </summary>
     public interface IColorService
     {
@@ -13,27 +13,27 @@ namespace AgriNaviApi.Application.Interfaces
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        Task<ColorCreateDto> CreateColorAsync(ColorCreateRequest request);
+        public Task<ColorCreateDto> CreateColorAsync(ColorCreateRequest request);
 
         /// <summary>
         /// カラーテーブルを更新する
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        Task<ColorUpdateDto> UpdateColorAsync(ColorUpdateRequest request);
+        public Task<ColorUpdateDto> UpdateColorAsync(ColorUpdateRequest request);
 
         /// <summary>
         /// カラーテーブルから削除する
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        Task<ColorDeleteDto> DeleteColorAsync(ColorDeleteRequest request);
+        public Task<ColorDeleteDto> DeleteColorAsync(ColorDeleteRequest request);
 
         /// <summary>
         /// カラーテーブルを検索する
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        Task<ColorSearchDto> SearchColorAsync(ColorSearchRequest request); 
+        public Task<ColorSearchDto> SearchColorAsync(ColorSearchRequest request); 
     }
 }
