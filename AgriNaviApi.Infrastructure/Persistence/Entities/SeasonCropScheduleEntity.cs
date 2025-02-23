@@ -1,80 +1,71 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using System.Drawing;
 
 namespace AgriNaviApi.Infrastructure.Persistence.Entities
 {
     /// <summary>
-    /// 作付名テーブル
+    /// 作付計画テーブル
     /// </summary>
-    [Table("crops")]
-    public class CropPersistenceEntity
+    [Table("season_crop_schedules")]
+    public class SeasonCropScheduleEntity
     {
         /// <summary>
-        /// 作付名ID(自動インクリメントID)
+        /// 作付計画ID(自動インクリメントID)
         /// </summary>
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("crop_id")]
+        [Column("season_crop_schedule_id")]
         public int Id { get; set; }
 
         /// <summary>
-        /// 作付名UUID
+        /// 作付計画UUID
         /// </summary>
-        [Column("crop_uuid")]
+        [Column("season_crop_schedule_uuid")]
         public Guid Uuid { get; set; }
 
         /// <summary>
-        /// 作付名
+        /// 作付計画名
         /// </summary>
-        [Column("crop_name")]
+        [Column("season_crop_schedule_name")]
         [Required]
-        [StringLength(20)]
+        [StringLength(30)]
         public string Name { get; set; } = string.Empty;
 
         /// <summary>
-        /// 作付名省略名
+        /// 作付名ID
         /// </summary>
-        [Column("crop_short_name")]
-        [Required]
-        [StringLength(4)]
-        public string? ShortenName { get; set; }
+        [Column("crop_id")]
+        public int CropId { get; set; }
 
         /// <summary>
-        /// グループID
+        /// 作付名エンティティ
         /// </summary>
-        [Column("group_id")]
-        public int GroupId { get; set; }
+        [ForeignKey(nameof(CropId))]
+        public CropEntity Crop { get; set; }
 
         /// <summary>
-        /// グループエンティティ
+        /// 計画開始年月
         /// </summary>
-        [ForeignKey(nameof(GroupId))]
-        public GroupPersistenceEntity Group { get; set; }
+        [Column("season_crop_schedule_start_date", TypeName = "date")]
+        public DateTime StartDate { get; set; }
 
         /// <summary>
-        /// カラーID
+        /// 計画終了年月
         /// </summary>
-        [Column("color_id")]
-        public int ColorId { get; set; }
-
-        /// <summary>
-        /// カラーエンティティ
-        /// </summary>
-        [ForeignKey(nameof(ColorId))]
-        public ColorPersistenceEntity Color { get; set; }
+        [Column("season_crop_schedule_end_date", TypeName = "date")]
+        public DateTime EndDate { get; set; }
 
         /// <summary>
         /// 備考
         /// </summary>
-        [Column("crop_remark")]
+        [Column("season_crop_schedule_remark")]
         [StringLength(200)]
         public string? Remark { get; set; }
 
         /// <summary>
         /// 削除フラグ
         /// </summary>
-        [Column("crop_delete_flg")]
+        [Column("season_crop_schedule_delete_flg")]
         public bool IsDeleted { get; set; }
 
         /// <summary>
@@ -89,26 +80,22 @@ namespace AgriNaviApi.Infrastructure.Persistence.Entities
         [Column("last_updated_at")]
         public DateTime LastUpdatedAt { get; set; } = DateTime.UtcNow;
 
-
         /// <summary>
         /// 非null許容型の外部キーのエンティティの初期値がない場合はnullを設定する
         /// </summary>
-        public CropPersistenceEntity()
+        public SeasonCropScheduleEntity()
         {
-            Group = null!;
-            Color = null!;
+            Crop = null!;
         }
 
         /// <summary>
         /// 非null許容型の外部キーのエンティティの初期値を設定する
         /// </summary>
-        /// <param name="group">グループエンティティ</param>
-        /// <param name="color">カラーエンティティ</param>
+        /// <param name="crop">作付名エンティティ</param>
         /// <exception cref="ArgumentNullException"></exception>
-        public CropPersistenceEntity(GroupPersistenceEntity group, ColorPersistenceEntity color)
+        public SeasonCropScheduleEntity(CropEntity crop)
         {
-            Group = group ?? throw new ArgumentNullException(nameof(group));
-            Color = color ?? throw new ArgumentNullException(nameof(color));
+            Crop = crop ?? throw new ArgumentNullException(nameof(crop));
         }
     }
 }

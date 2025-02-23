@@ -4,38 +4,53 @@ using System.ComponentModel.DataAnnotations;
 namespace AgriNaviApi.Infrastructure.Persistence.Entities
 {
     /// <summary>
-    /// 出荷先名テーブル
+    /// Colorsテーブル
     /// </summary>
-    [Table("shipping_destinations")]
-    public class ShippingDestinationPersistenceEntity
+    [Table("colors")]
+    public class ColorEntity
     {
         /// <summary>
-        /// 出荷先名ID(自動インクリメントID)
+        /// カラーID(自動インクリメントID)
         /// </summary>
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("shipping_destination_id")]
+        [Column("color_id")]
         public int Id { get; set; }
 
         /// <summary>
-        /// 出荷先名UUID
+        /// カラーUUID
         /// </summary>
-        [Column("shipping_destination_uuid")]
+        [Column("color_uuid")]
         public Guid Uuid { get; set; }
 
         /// <summary>
-        /// 出荷先名
+        /// カラー名
         /// </summary>
-        [Column("shipping_destination_name")]
+        [Column("color_name")]
         [Required]
         [StringLength(20)]
         public string Name { get; set; } = string.Empty;
 
         /// <summary>
-        /// 削除フラグ
+        /// Red値
         /// </summary>
-        [Column("shipping_destination_delete_flg")]
-        public bool IsDeleted { get; set; }
+        [Column("color_red_value")]
+        [Range(0, 255)]
+        public int RedValue { get; set; }
+
+        /// <summary>
+        /// Green値
+        /// </summary>
+        [Column("color_green_value")]
+        [Range(0, 255)]
+        public int GreenValue { get; set; }
+
+        /// <summary>
+        /// Blue値
+        /// </summary>
+        [Column("color_blue_value")]
+        [Range(0, 255)]
+        public int BlueValue { get; set; }
 
         /// <summary>
         /// 登録日時

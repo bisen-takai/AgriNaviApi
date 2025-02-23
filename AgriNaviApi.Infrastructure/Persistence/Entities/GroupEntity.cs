@@ -8,7 +8,7 @@ namespace AgriNaviApi.Infrastructure.Persistence.Entities
     /// グループ名テーブル
     /// </summary>
     [Table("groups")]
-    public class GroupPersistenceEntity
+    public class GroupEntity
     {
         /// <summary>
         /// グループ名ID(自動インクリメントID)

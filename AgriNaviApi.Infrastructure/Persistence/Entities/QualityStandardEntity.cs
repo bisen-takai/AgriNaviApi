@@ -7,7 +7,7 @@ namespace AgriNaviApi.Infrastructure.Persistence.Entities
     /// 品質・規格名テーブル
     /// </summary>
     [Table("quality_standards")]
-    public class QualityStandardPersistenceEntity
+    public class QualityStandardEntity
     {
         /// <summary>
         /// 品質・規格名ID(自動インクリメントID)

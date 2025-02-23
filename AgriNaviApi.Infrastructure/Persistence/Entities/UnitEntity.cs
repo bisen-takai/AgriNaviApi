@@ -7,7 +7,7 @@ namespace AgriNaviApi.Infrastructure.Persistence.Entities
     /// 単位名テーブル
     /// </summary>
     [Table("units")]
-    public class UnitPersistenceEntity
+    public class UnitEntity
     {
         /// <summary>
         /// 単位名ID(自動インクリメントID)

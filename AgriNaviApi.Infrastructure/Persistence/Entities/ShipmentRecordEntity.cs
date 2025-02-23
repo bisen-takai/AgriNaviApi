@@ -7,7 +7,7 @@ namespace AgriNaviApi.Infrastructure.Persistence.Entities
     /// 出荷記録テーブル
     /// </summary>
     [Table("shipment_records")]
-    public class ShipmentRecordPersistenceEntity
+    public class ShipmentRecordEntity
     {
         /// <summary>
         /// 出荷記録ID(自動インクリメントID)
@@ -39,7 +39,7 @@ namespace AgriNaviApi.Infrastructure.Persistence.Entities
         /// 圃場エンティティ
         /// </summary>
         [ForeignKey(nameof(FieldId))]
-        public FieldPersistenceEntity? Field { get; set; }
+        public FieldEntity? Field { get; set; }
 
         /// <summary>
         /// 作付ID
@@ -51,7 +51,7 @@ namespace AgriNaviApi.Infrastructure.Persistence.Entities
         /// 作付エンティティ
         /// </summary>
         [ForeignKey(nameof(CropId))]
-        public CropPersistenceEntity Crop { get; set; }
+        public CropEntity Crop { get; set; }
 
         /// <summary>
         /// 作付年間計画ID
@@ -63,7 +63,7 @@ namespace AgriNaviApi.Infrastructure.Persistence.Entities
         /// 作付年間計画エンティティ
         /// </summary>
         [ForeignKey(nameof(SeasonCropScheduleId))]
-        public SeasonCropSchedulePersistenceEntity SeasonCropSchedule { get; set; }
+        public SeasonCropScheduleEntity SeasonCropSchedule { get; set; }
 
         /// <summary>
         /// 備考
@@ -93,12 +93,12 @@ namespace AgriNaviApi.Infrastructure.Persistence.Entities
         /// <summary>
         /// 出荷詳細エンティティのコレクション
         /// </summary>
-        public ICollection<ShipmentRecordDetailPersistenceEntity>? Details { get; set; }
+        public ICollection<ShipmentRecordDetailEntity>? Details { get; set; }
 
         /// <summary>
         /// 非null許容型の外部キーのエンティティの初期値がない場合はnullを設定する
         /// </summary>
-        public ShipmentRecordPersistenceEntity()
+        public ShipmentRecordEntity()
         {
             Crop = null!;
             SeasonCropSchedule = null!;
@@ -110,7 +110,7 @@ namespace AgriNaviApi.Infrastructure.Persistence.Entities
         /// <param name="crop">作付名エンティティ</param>
         /// <param name="seasonCropSchedule">作付計画エンティティ</param>
         /// <exception cref="ArgumentNullException"></exception>
-        public ShipmentRecordPersistenceEntity(CropPersistenceEntity crop, SeasonCropSchedulePersistenceEntity seasonCropSchedule)
+        public ShipmentRecordEntity(CropEntity crop, SeasonCropScheduleEntity seasonCropSchedule)
         {
             Crop = crop ?? throw new ArgumentNullException(nameof(crop));
             SeasonCropSchedule = seasonCropSchedule ?? throw new ArgumentNullException(nameof(seasonCropSchedule));

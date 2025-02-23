@@ -1,86 +1,61 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using AgriNaviApi.Common.Enums;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AgriNaviApi.Infrastructure.Persistence.Entities
 {
     /// <summary>
-    /// ユーザテーブル
+    /// 圃場情報テーブル
     /// </summary>
-    [Table("users")]
-    public class UserPersistenceEntity
+    [Table("fields")]
+    public class FieldEntity
     {
         /// <summary>
-        /// ユーザID(自動インクリメントID)
+        /// 圃場情報ID(自動インクリメントID)
         /// </summary>
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("user_id")]
+        [Column("field_id")]
         public int Id { get; set; }
 
         /// <summary>
-        /// ユーザUUID
+        /// 圃場情報UUID
         /// </summary>
-        [Column("user_uuid")]
+        [Column("field_uuid")]
         public Guid Uuid { get; set; }
 
         /// <summary>
-        /// ログインID
+        /// 圃場名
         /// </summary>
-        [Column("user_login_id")]
+        [Column("field_name")]
         [Required]
         [StringLength(20)]
-        public string LoginId { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
 
         /// <summary>
-        /// ハッシュ化したパスワード
+        /// 圃場名省略名
         /// </summary>
-        [Column("user_password")]
+        [Column("field_short_name")]
         [Required]
-        [StringLength(64, MinimumLength = 64)]
-        public string PasswordHash { get; set; } = string.Empty;
+        [StringLength(4)]
+        public string? ShortName { get; set; }
 
         /// <summary>
-        /// ソルト値
+        /// 面積(a)
         /// </summary>
-        [Column("user_salt")]
-        [Required]
-        [StringLength(24, MinimumLength = 24)]
-        public string Salt { get; set; } = string.Empty;
+        [Column("field_size")]
+        public int FarmSize { get; set; }
 
         /// <summary>
-        /// 氏名
+        /// グループID
         /// </summary>
-        [Column("user_full_name")]
-        [MaxLength(20)]
-        public string? FullName { get; set; }
+        [Column("group_id")]
+        public int GroupId { get; set; }
 
         /// <summary>
-        /// 電話番号
+        /// グループエンティティ
         /// </summary>
-        [Column("user_phone_number")]
-        [RegularExpression(@"^\d{10,11}$", ErrorMessage = "電話番号は10桁または11桁の数字でなければなりません")]
-        [StringLength(11)]
-        public string? PhoneNumber { get; set; }
-
-        /// <summary>
-        /// メールアドレス
-        /// </summary>
-        [Column("user_email")]
-        [EmailAddress]
-        public string? Email { get; set; }
-
-        /// <summary>
-        /// 住所
-        /// </summary>
-        [Column("user_address")]
-        public string? Address { get; set; }
-
-        /// <summary>
-        /// 権限ID
-        /// </summary>
-        [Column("privilege_id")]
-        public PrivilegeKind PrivilegeId { get; set; }
+        [ForeignKey(nameof(GroupId))]
+        public GroupEntity Group { get; set; }
 
         /// <summary>
         /// カラーID
@@ -92,19 +67,19 @@ namespace AgriNaviApi.Infrastructure.Persistence.Entities
         /// カラーエンティティ
         /// </summary>
         [ForeignKey(nameof(ColorId))]
-        public ColorPersistenceEntity Color { get; set; }
+        public ColorEntity Color { get; set; }
 
         /// <summary>
         /// 備考
         /// </summary>
-        [Column("user_remark")]
+        [Column("field_remark")]
         [StringLength(200)]
         public string? Remark { get; set; }
 
         /// <summary>
         /// 削除フラグ
         /// </summary>
-        [Column("user_delete_flg")]
+        [Column("field_delete_flg")]
         public bool IsDeleted { get; set; }
 
         /// <summary>
@@ -119,22 +94,24 @@ namespace AgriNaviApi.Infrastructure.Persistence.Entities
         [Column("last_updated_at")]
         public DateTime LastUpdatedAt { get; set; } = DateTime.UtcNow;
 
-
         /// <summary>
         /// 非null許容型の外部キーのエンティティの初期値がない場合はnullを設定する
         /// </summary>
-        public UserPersistenceEntity()
+        public FieldEntity()
         {
+            Group = null!;
             Color = null!;
         }
 
         /// <summary>
         /// 非null許容型の外部キーのエンティティの初期値を設定する
         /// </summary>
+        /// <param name="group">グループエンティティ</param>
         /// <param name="color">カラーエンティティ</param>
         /// <exception cref="ArgumentNullException"></exception>
-        public UserPersistenceEntity(ColorPersistenceEntity color)
+        public FieldEntity(GroupEntity group, ColorEntity color)
         {
+            Group = group ?? throw new ArgumentNullException(nameof(group));
             Color = color ?? throw new ArgumentNullException(nameof(color));
         }
     }

@@ -7,7 +7,7 @@ namespace AgriNaviApi.Infrastructure.Persistence.Entities
     /// 出荷記録詳細テーブル
     /// </summary>
     [Table("shipment_record_details")]
-    public class ShipmentRecordDetailPersistenceEntity
+    public class ShipmentRecordDetailEntity
     {
         /// <summary>
         /// 出荷記録詳細ID(自動インクリメントID)
@@ -33,7 +33,7 @@ namespace AgriNaviApi.Infrastructure.Persistence.Entities
         /// 出荷記録エンティティ
         /// </summary>
         [ForeignKey(nameof(ShipmentRecordId))]
-        public ShipmentRecordPersistenceEntity ShipmentRecord { get; set; }
+        public ShipmentRecordEntity ShipmentRecord { get; set; }
 
         /// <summary>
         /// 出荷先ID
@@ -45,7 +45,7 @@ namespace AgriNaviApi.Infrastructure.Persistence.Entities
         /// 出荷先エンティティ
         /// </summary>
         [ForeignKey(nameof(ShippingDestinationId))]
-        public ShippingDestinationPersistenceEntity ShippingDestination { get; set; }
+        public ShippingDestinationEntity ShippingDestination { get; set; }
 
         /// <summary>
         /// 品質規格ID
@@ -57,7 +57,7 @@ namespace AgriNaviApi.Infrastructure.Persistence.Entities
         /// 品質規格エンティティ
         /// </summary>
         [ForeignKey(nameof(QualityStandardId))]
-        public QualityStandardPersistenceEntity QualityStandard { get; set; }
+        public QualityStandardEntity QualityStandard { get; set; }
 
         /// <summary>
         /// 数量
@@ -75,7 +75,7 @@ namespace AgriNaviApi.Infrastructure.Persistence.Entities
         /// 単位エンティティ
         /// </summary>
         [ForeignKey(nameof(UnitId))]
-        public UnitPersistenceEntity Unit { get; set; }
+        public UnitEntity Unit { get; set; }
 
         /// <summary>
         /// 金額
@@ -98,7 +98,7 @@ namespace AgriNaviApi.Infrastructure.Persistence.Entities
         /// <summary>
         /// 非null許容型の外部キーのエンティティの初期値がない場合はnullを設定する
         /// </summary>
-        public ShipmentRecordDetailPersistenceEntity()
+        public ShipmentRecordDetailEntity()
         {
             ShipmentRecord = null!;
             ShippingDestination = null!;
@@ -114,10 +114,10 @@ namespace AgriNaviApi.Infrastructure.Persistence.Entities
         /// <param name="qualityStandard">品質規格名エンティティ</param>
         /// <param name="unit">単位名エンティティ</param>
         /// <exception cref="ArgumentNullException"></exception>
-        public ShipmentRecordDetailPersistenceEntity(ShipmentRecordPersistenceEntity shipmentRecord,
-                                                     ShippingDestinationPersistenceEntity shippingDestination,
-                                                     QualityStandardPersistenceEntity qualityStandard,
-                                                     UnitPersistenceEntity unit)
+        public ShipmentRecordDetailEntity(ShipmentRecordEntity shipmentRecord,
+                                                     ShippingDestinationEntity shippingDestination,
+                                                     QualityStandardEntity qualityStandard,
+                                                     UnitEntity unit)
         {
             ShipmentRecord = shipmentRecord ?? throw new ArgumentNullException(nameof(shipmentRecord));
             ShippingDestination = shippingDestination ?? throw new ArgumentNullException(nameof(shippingDestination));
