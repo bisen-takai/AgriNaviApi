@@ -11,4 +11,9 @@
     <ProjectReference Include="..\AgriNaviApi.Infrastructure\AgriNaviApi.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Services\" />
+    <Folder Include="Interfaces\" />
+  </ItemGroup>
+
 </Project>
