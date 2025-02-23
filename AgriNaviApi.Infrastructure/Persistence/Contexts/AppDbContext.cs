@@ -59,5 +59,43 @@ namespace AgriNaviApi.Infrastructure.Persistence.Contexts
         /// 出荷記録詳細
         /// </summary>
         public DbSet<ShipmentRecordDetailEntity> ShipmentRecordDetails { get; set; }
+
+        /// <summary>
+        /// 特に固有の初期化処理や特定の設定はないため、処理なしでbaseコンストラクタに渡す
+        /// </summary>
+        /// <param name="options"></param>
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+        {
+
+        }
+
+        /// <summary>
+        /// 基本的に各エンティティ共通のマッピングや制約などを定義
+        /// </summary>
+        /// <remark>
+        /// 各エンティティ個別で行う処理は各エンティティ個別のConfigureメソッドにて行うこと
+        /// </remark>
+        /// <param name="modelBuilder"></param>
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            // UUIDであるGuid型をchar(36)に変換する
+            // 基本的にすべてのテーブルにUUIDがあるため、ここで一括で変換する
+            foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+            {
+                foreach (var property in entityType.GetProperties())
+                {
+                    // Guid型またはNullable<Guid>型の場合に処理を適用
+                    if (property.ClrType == typeof(Guid) || property.ClrType == typeof(Guid?))
+                    {
+                        property.SetColumnType("char(36)");
+                    }
+                }
+            }
+
+            // IEntityTypeConfigurationを継承するすべてのConfigureメソッドを実行する(各エンティティの設定)
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
+        }
     }
 }
