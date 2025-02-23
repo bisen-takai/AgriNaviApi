@@ -1,3 +1,5 @@
+using AgriNaviApi.Application.Extensions;
+using AgriNaviApi.Common.Extensions;
 using AgriNaviApi.Infrastructure.Persistence.Contexts;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,6 +21,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>(options => options.UseMySql(connectionString, serverVersion));
+
+// CommonëwÇÃÉTÅ[ÉrÉXÇÃìoò^
+builder.Services.AddCommonServices();
 
 var app = builder.Build();
 
