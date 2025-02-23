@@ -59,7 +59,7 @@ namespace AgriNaviApi.Infrastructure.Persistence.Entities
         /// 電話番号
         /// </summary>
         [Column("user_phone_number")]
-        [RegularExpression(@"^\d{10,11}$", ErrorMessage = "電話番号は10桁または11桁の数字でなければなりません")]
+        [RegularExpression(@"^\d{10,11}$")]
         [StringLength(11)]
         public string? PhoneNumber { get; set; }
 
