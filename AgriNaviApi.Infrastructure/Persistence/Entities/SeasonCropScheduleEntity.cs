@@ -41,7 +41,7 @@ namespace AgriNaviApi.Infrastructure.Persistence.Entities
         /// 作付名エンティティ
         /// </summary>
         [ForeignKey(nameof(CropId))]
-        public CropEntity Crop { get; set; }
+        public CropEntity Crop { get; set; } = null!;
 
         /// <summary>
         /// 計画開始年月
@@ -81,11 +81,10 @@ namespace AgriNaviApi.Infrastructure.Persistence.Entities
         public DateTime LastUpdatedAt { get; set; } = DateTime.UtcNow;
 
         /// <summary>
-        /// 非null許容型の外部キーのエンティティの初期値がない場合はnullを設定する
+        /// EF Coreマッピング用
         /// </summary>
         public SeasonCropScheduleEntity()
         {
-            Crop = null!;
         }
 
         /// <summary>

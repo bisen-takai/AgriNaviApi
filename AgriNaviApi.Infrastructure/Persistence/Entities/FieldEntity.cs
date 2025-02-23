@@ -55,7 +55,7 @@ namespace AgriNaviApi.Infrastructure.Persistence.Entities
         /// グループエンティティ
         /// </summary>
         [ForeignKey(nameof(GroupId))]
-        public GroupEntity Group { get; set; }
+        public GroupEntity Group { get; set; } = null!;
 
         /// <summary>
         /// カラーID
@@ -67,7 +67,7 @@ namespace AgriNaviApi.Infrastructure.Persistence.Entities
         /// カラーエンティティ
         /// </summary>
         [ForeignKey(nameof(ColorId))]
-        public ColorEntity Color { get; set; }
+        public ColorEntity Color { get; set; } = null!;
 
         /// <summary>
         /// 備考
@@ -95,12 +95,10 @@ namespace AgriNaviApi.Infrastructure.Persistence.Entities
         public DateTime LastUpdatedAt { get; set; } = DateTime.UtcNow;
 
         /// <summary>
-        /// 非null許容型の外部キーのエンティティの初期値がない場合はnullを設定する
+        /// EF Coreマッピング用
         /// </summary>
         public FieldEntity()
         {
-            Group = null!;
-            Color = null!;
         }
 
         /// <summary>

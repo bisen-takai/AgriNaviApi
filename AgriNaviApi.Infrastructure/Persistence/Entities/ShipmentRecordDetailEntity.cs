@@ -33,7 +33,7 @@ namespace AgriNaviApi.Infrastructure.Persistence.Entities
         /// 出荷記録エンティティ
         /// </summary>
         [ForeignKey(nameof(ShipmentRecordId))]
-        public ShipmentRecordEntity ShipmentRecord { get; set; }
+        public ShipmentRecordEntity ShipmentRecord { get; set; } = null!;
 
         /// <summary>
         /// 出荷先ID
@@ -45,7 +45,7 @@ namespace AgriNaviApi.Infrastructure.Persistence.Entities
         /// 出荷先エンティティ
         /// </summary>
         [ForeignKey(nameof(ShippingDestinationId))]
-        public ShippingDestinationEntity ShippingDestination { get; set; }
+        public ShippingDestinationEntity ShippingDestination { get; set; } = null!;
 
         /// <summary>
         /// 品質規格ID
@@ -57,7 +57,7 @@ namespace AgriNaviApi.Infrastructure.Persistence.Entities
         /// 品質規格エンティティ
         /// </summary>
         [ForeignKey(nameof(QualityStandardId))]
-        public QualityStandardEntity QualityStandard { get; set; }
+        public QualityStandardEntity QualityStandard { get; set; } = null!;
 
         /// <summary>
         /// 数量
@@ -75,7 +75,7 @@ namespace AgriNaviApi.Infrastructure.Persistence.Entities
         /// 単位エンティティ
         /// </summary>
         [ForeignKey(nameof(UnitId))]
-        public UnitEntity Unit { get; set; }
+        public UnitEntity Unit { get; set; } = null!;
 
         /// <summary>
         /// 金額
@@ -96,14 +96,10 @@ namespace AgriNaviApi.Infrastructure.Persistence.Entities
         public DateTime LastUpdatedAt { get; set; } = DateTime.UtcNow;
 
         /// <summary>
-        /// 非null許容型の外部キーのエンティティの初期値がない場合はnullを設定する
+        /// EF Coreマッピング用
         /// </summary>
         public ShipmentRecordDetailEntity()
         {
-            ShipmentRecord = null!;
-            ShippingDestination = null!;
-            QualityStandard = null!;
-            Unit = null!;
         }
 
         /// <summary>
