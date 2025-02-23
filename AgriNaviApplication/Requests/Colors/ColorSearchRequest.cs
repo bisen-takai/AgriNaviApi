@@ -16,13 +16,6 @@ namespace AgriNaviApi.Application.Requests.Colors
         public string? SearchColorName { get; set; }
 
         /// <summary>
-        /// 検索RGB値
-        /// </summary>
-        [Display(Name = "検索RGB値")]
-        [Range(0,16777215, ErrorMessageResourceName = nameof(CommonValidationMessages.RangeMessage), ErrorMessageResourceType = typeof(CommonValidationMessages))]
-        public int RGB { get; set; }
-
-        /// <summary>
         /// 検索一致タイプ
         /// </summary>
         [Display(Name = "検索一致タイプ")]
