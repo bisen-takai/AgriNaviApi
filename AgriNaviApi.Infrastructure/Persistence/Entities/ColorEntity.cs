@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
 
 namespace AgriNaviApi.Infrastructure.Persistence.Entities
 {
@@ -7,6 +8,7 @@ namespace AgriNaviApi.Infrastructure.Persistence.Entities
     /// Colorsテーブル
     /// </summary>
     [Table("colors")]
+    [Index(nameof(Name), IsUnique = true)]
     public class ColorEntity
     {
         /// <summary>
