@@ -17,6 +17,7 @@ namespace AgriNaviApi.Common.Extensions
         public static IServiceCollection AddCommonServices(this IServiceCollection services)
         {
             services.AddScoped<IUuidGenerator, UuidGenerator>();
+            services.AddScoped<IDateTimeProvider, SystemDateTimeProvider>();
 
             return services;
         }
