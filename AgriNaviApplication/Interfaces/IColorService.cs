@@ -16,6 +16,13 @@ namespace AgriNaviApi.Application.Interfaces
         public Task<ColorCreateDto> CreateColorAsync(ColorCreateRequest request);
 
         /// <summary>
+        /// カラーテーブル詳細を取得する
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public Task<ColorDetailDto> GetColorByIdAsync(int id);
+
+        /// <summary>
         /// カラーテーブルを更新する
         /// </summary>
         /// <param name="request"></param>

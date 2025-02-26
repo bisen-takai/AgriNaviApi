@@ -61,6 +61,27 @@ namespace AgriNaviApi.Application.Services
         }
 
         /// <summary>
+        /// カラーテーブル詳細を取得する
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        /// <exception cref="KeyNotFoundException"></exception>
+        public async Task<ColorDetailDto> GetColorByIdAsync(int id)
+        {
+            var color = await _context.Colors.FindAsync(id);
+
+            if (color == null)
+            {
+                string message = string.Format(CommonErrorMessages.NotFoundMessage, TableName);
+                // エンティティが存在しない場合は、例外を投げる
+                throw new KeyNotFoundException(message);
+            }
+
+            // エンティティから DTO へ変換する
+            return _mapper.Map<ColorDetailDto>(color);
+        }
+
+        /// <summary>
         /// カラーテーブルを更新する
         /// </summary>
         /// <param name="request">更新用リクエストデータ</param>
