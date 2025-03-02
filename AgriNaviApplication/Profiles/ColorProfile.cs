@@ -19,6 +19,8 @@ namespace AgriNaviApi.Application.Profiles
 
             CreateMap<ColorEntity, ColorDeleteDto>();
 
+            CreateMap<ColorEntity, ColorDetailDto>();
+
             // 検索結果用
             CreateMap<ColorEntity, ColorListItemDto>();
 
@@ -31,6 +33,8 @@ namespace AgriNaviApi.Application.Profiles
                 .ForMember(dest => dest.Uuid, opt => opt.Ignore())
                 .ForMember(dest => dest.CreatedAt, opt => opt.Ignore())
                 .ForMember(dest => dest.LastUpdatedAt, opt => opt.Ignore());
+
+            // 詳細(Idを受け取るのみなので、マッピング不要)
 
             // 更新(Id,UUIDは変更不可, LastUpdatedAtはサービス層で設定)
             CreateMap<ColorUpdateRequest, ColorEntity>()
