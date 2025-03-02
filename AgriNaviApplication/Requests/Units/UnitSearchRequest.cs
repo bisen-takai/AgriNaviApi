@@ -4,6 +4,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AgriNaviApi.Application.Requests.Units
 {
+    /// <summary>
+    /// 単位検索リクエスト
+    /// </summary>
     public class UnitSearchRequest
     {
         /// <summary>
