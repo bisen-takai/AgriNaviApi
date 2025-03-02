@@ -5,11 +5,19 @@ VisualStudioVersion = 17.9.34714.143
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AgriNaviApi.API", "AgriNaviApi.API\AgriNaviApi.API.csproj", "{A536E1D8-BBD6-46AC-8027-41A3D04B3924}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgriNaviApi.Application", "AgriNaviApplication\AgriNaviApi.Application.csproj", "{72D3325E-0581-47D7-B512-5A418475CBC3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AgriNaviApi.Application", "AgriNaviApplication\AgriNaviApi.Application.csproj", "{72D3325E-0581-47D7-B512-5A418475CBC3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgriNaviApi.Common", "AgriNaviApi.Common\AgriNaviApi.Common.csproj", "{4A977C44-1E59-4626-9B4F-B4689D3FC13E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AgriNaviApi.Common", "AgriNaviApi.Common\AgriNaviApi.Common.csproj", "{4A977C44-1E59-4626-9B4F-B4689D3FC13E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgriNaviApi.Infrastructure", "AgriNaviApi.Infrastructure\AgriNaviApi.Infrastructure.csproj", "{0B1E5BC2-7752-4617-B785-1B388BC04E97}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AgriNaviApi.Infrastructure", "AgriNaviApi.Infrastructure\AgriNaviApi.Infrastructure.csproj", "{0B1E5BC2-7752-4617-B785-1B388BC04E97}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgriNaviApi.Infrastructure.UnitTests", "AgriNaviApi.Infrastructure.UnitTests\AgriNaviApi.Infrastructure.UnitTests.csproj", "{787BA39F-BAD6-4275-A058-04ECC806C0D7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgriNaviApi.Common.UnitTests", "AgriNaviApi.Common.UnitTests\AgriNaviApi.Common.UnitTests.csproj", "{1D51EBFF-C054-4E72-B0AF-035A137F4EA7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgriNaviApi.Application.UnitTests", "AgriNaviApi.Application.UnitTests\AgriNaviApi.Application.UnitTests.csproj", "{9B453270-3CEB-431D-9C42-2EBF961E7DB0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgriNaviApi.API.UnitTests", "AgriNaviApi.API.UnitTests\AgriNaviApi.API.UnitTests.csproj", "{C80A3BCC-B468-44FE-888B-D784E7EC6120}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +41,22 @@ Global
 		{0B1E5BC2-7752-4617-B785-1B388BC04E97}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B1E5BC2-7752-4617-B785-1B388BC04E97}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0B1E5BC2-7752-4617-B785-1B388BC04E97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{787BA39F-BAD6-4275-A058-04ECC806C0D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{787BA39F-BAD6-4275-A058-04ECC806C0D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{787BA39F-BAD6-4275-A058-04ECC806C0D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{787BA39F-BAD6-4275-A058-04ECC806C0D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D51EBFF-C054-4E72-B0AF-035A137F4EA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D51EBFF-C054-4E72-B0AF-035A137F4EA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D51EBFF-C054-4E72-B0AF-035A137F4EA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D51EBFF-C054-4E72-B0AF-035A137F4EA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B453270-3CEB-431D-9C42-2EBF961E7DB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B453270-3CEB-431D-9C42-2EBF961E7DB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B453270-3CEB-431D-9C42-2EBF961E7DB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B453270-3CEB-431D-9C42-2EBF961E7DB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C80A3BCC-B468-44FE-888B-D784E7EC6120}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C80A3BCC-B468-44FE-888B-D784E7EC6120}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C80A3BCC-B468-44FE-888B-D784E7EC6120}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C80A3BCC-B468-44FE-888B-D784E7EC6120}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
