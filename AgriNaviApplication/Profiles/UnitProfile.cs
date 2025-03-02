@@ -6,7 +6,7 @@ using AutoMapper;
 namespace AgriNaviApi.Application.Profiles
 {
     /// <summary>
-    /// カラーテーブルに関するマッピング管理
+    /// 単位テーブルに関するマッピング管理
     /// </summary>
     public class UnitProfile : Profile
     {
