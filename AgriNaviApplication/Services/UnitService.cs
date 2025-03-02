@@ -41,7 +41,7 @@ namespace AgriNaviApi.Application.Services
         public async Task<UnitCreateDto> CreateUnitAsync(UnitCreateRequest request)
         {
             // 単位名が既に登録されているかをチェック
-            var exists = await _context.Units.AnyAsync(u => u.Name == request.Name);
+            var exists = await _context.Units.AnyAsync(u => u.Name == request.Name && !u.IsDeleted);
             if (exists)
             {
                 string message = string.Format(CommonErrorMessages.DuplicateErrorMessage, request.Name);
@@ -71,7 +71,7 @@ namespace AgriNaviApi.Application.Services
         {
             var unit = await _context.Units.FindAsync(id);
 
-            if (unit == null)
+            if (unit == null || unit.IsDeleted)
             {
                 string message = string.Format(CommonErrorMessages.NotFoundMessage, TableName);
                 // エンティティが存在しない場合は、例外を投げる
@@ -92,7 +92,7 @@ namespace AgriNaviApi.Application.Services
         {
             var unit = await _context.Units.FindAsync(request.Id);
 
-            if (unit == null)
+            if (unit == null || unit.IsDeleted)
             {
                 string message = string.Format(CommonErrorMessages.NotFoundMessage, TableName);
                 throw new KeyNotFoundException(message);
@@ -109,7 +109,7 @@ namespace AgriNaviApi.Application.Services
         }
 
         /// <summary>
-        /// 単位テーブルから削除する
+        /// 単位テーブルから削除する※削除フラグをtrueにするのみで、実際は削除しない
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
@@ -124,7 +124,16 @@ namespace AgriNaviApi.Application.Services
                 throw new InvalidOperationException(message);
             }
 
-            _context.Units.Remove(unit);
+            if (unit.IsDeleted)
+            {
+                // 既に削除済みの場合
+                string message = string.Format(CommonErrorMessages.DeletedMessage, TableName);
+                throw new InvalidOperationException(message);
+            }
+
+            unit.IsDeleted = true;
+            unit.LastUpdatedAt = _dateTimeProvider.UtcNow;
+
             await _context.SaveChangesAsync();
 
             return new UnitDeleteDto
@@ -150,20 +159,21 @@ namespace AgriNaviApi.Application.Services
                 switch (request.SearchMatchType)
                 {
                     case SearchMatchType.EXACT:
-                        query = query.Where(c => c.Name == request.SearchUnitName);
+                        query = query.Where(c => c.Name == request.SearchUnitName && !c.IsDeleted);
                         break;
                     case SearchMatchType.PREFIX:
-                        query = query.Where(c => c.Name.StartsWith(request.SearchUnitName));
+                        query = query.Where(c => c.Name.StartsWith(request.SearchUnitName) && !c.IsDeleted);
                         break;
                     case SearchMatchType.SUFFIX:
-                        query = query.Where(c => c.Name.EndsWith(request.SearchUnitName));
+                        query = query.Where(c => c.Name.EndsWith(request.SearchUnitName) && !c.IsDeleted);
                         break;
                     case SearchMatchType.PARTIAL:
-                        query = query.Where(c => c.Name.Contains(request.SearchUnitName));
+                        query = query.Where(c => c.Name.Contains(request.SearchUnitName) && !c.IsDeleted);
                         break;
                     case SearchMatchType.None:
                     default:
                         // 全件検索とする
+                        query = query.Where(c => !c.IsDeleted);
                         break;
                 }
             }

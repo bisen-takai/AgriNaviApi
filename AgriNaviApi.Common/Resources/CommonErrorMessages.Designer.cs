@@ -61,6 +61,15 @@ namespace AgriNaviApi.Common.Resources {
         }
         
         /// <summary>
+        ///   {0}は既に削除済みです。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string DeletedMessage {
+            get {
+                return ResourceManager.GetString("DeletedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   「{0}」は既に利用されています。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string DuplicateErrorMessage {
