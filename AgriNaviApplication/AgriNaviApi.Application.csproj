@@ -15,4 +15,13 @@
     <ProjectReference Include="..\AgriNaviApi.Infrastructure\AgriNaviApi.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="DTOs\Crops\" />
+    <Folder Include="DTOs\Groups\" />
+    <Folder Include="DTOs\QualityStandards\" />
+    <Folder Include="Requests\Crops\" />
+    <Folder Include="Requests\Groups\" />
+    <Folder Include="Requests\QualityStandards\" />
+  </ItemGroup>
+
 </Project>
