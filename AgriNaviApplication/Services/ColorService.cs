@@ -117,7 +117,7 @@ namespace AgriNaviApi.Application.Services
 
             if (color == null)
             {
-                string message = string.Format(CommonErrorMessages.NotFoundMessage, "カラー");
+                string message = string.Format(CommonErrorMessages.NotFoundMessage, TableName);
                 throw new InvalidOperationException(message);
             }
 
