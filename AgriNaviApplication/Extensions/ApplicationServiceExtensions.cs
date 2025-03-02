@@ -20,6 +20,9 @@ namespace AgriNaviApi.Application.Extensions
             services.AddScoped<IColorService, ColorService>();
             services.AddAutoMapper(typeof(ColorProfile).Assembly);
 
+            services.AddScoped<IUnitService, UnitService>();
+            services.AddAutoMapper(typeof(UnitProfile).Assembly);
+
             return services;
         }
     }
