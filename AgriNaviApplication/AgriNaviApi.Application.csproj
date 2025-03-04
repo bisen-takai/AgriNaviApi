@@ -15,9 +15,4 @@
     <ProjectReference Include="..\AgriNaviApi.Infrastructure\AgriNaviApi.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="DTOs\Crops\" />
-    <Folder Include="Requests\Crops\" />
-  </ItemGroup>
-
 </Project>
