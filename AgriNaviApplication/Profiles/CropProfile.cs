@@ -5,6 +5,9 @@ using AutoMapper;
 
 namespace AgriNaviApi.Application.Profiles
 {
+    /// <summary>
+    /// 作付名テーブルに関するマッピング管理
+    /// </summary>
     public class CropProfile : Profile
     {
         public CropProfile()

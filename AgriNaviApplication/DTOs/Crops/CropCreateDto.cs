@@ -1,5 +1,8 @@
 ﻿namespace AgriNaviApi.Application.DTOs.Crops
 {
+    /// <summary>
+    /// 作付名登録レスポンス
+    /// </summary>
     public class CropCreateDto
     {
         /// <summary>

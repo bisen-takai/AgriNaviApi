@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AgriNaviApi.Application.Requests.Crops
 {
+    /// <summary>
+    /// 作付名更新リクエスト
+    /// </summary>
     public class CropUpdateRequest
     {
         /// <summary>

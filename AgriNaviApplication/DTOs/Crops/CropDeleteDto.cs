@@ -1,9 +1,12 @@
 ﻿namespace AgriNaviApi.Application.DTOs.Crops
 {
+    /// <summary>
+    /// 作付名削除レスポンス
+    /// </summary>
     public class CropDeleteDto
     {
         /// <summary>
-        /// グループID(自動インクリメントID)
+        /// 作付名ID(自動インクリメントID)
         /// </summary>
         public int Id { get; set; }
 
