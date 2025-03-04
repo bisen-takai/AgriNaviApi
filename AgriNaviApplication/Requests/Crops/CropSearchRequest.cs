@@ -4,6 +4,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AgriNaviApi.Application.Requests.Crops
 {
+    /// <summary>
+    /// 作付名検索リクエスト
+    /// </summary>
     public class CropSearchRequest
     {
         /// <summary>
@@ -11,12 +14,6 @@ namespace AgriNaviApi.Application.Requests.Crops
         /// </summary>
         [Display(Name = "検索作付名")]
         public string? SearchCropName { get; set; }
-
-        /// <summary>
-        /// グループID
-        /// </summary>
-        [Display(Name = "グループID")]
-        public int GroupId { get; set; }
 
         /// <summary>
         /// 検索一致タイプ
