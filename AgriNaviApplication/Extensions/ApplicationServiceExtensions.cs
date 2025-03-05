@@ -32,6 +32,9 @@ namespace AgriNaviApi.Application.Extensions
             services.AddScoped<ICropService, CropService>();
             services.AddAutoMapper(typeof(CropProfile).Assembly);
 
+            services.AddScoped<IFieldService, FieldService>();
+            services.AddAutoMapper(typeof(FieldProfile).Assembly);
+
             return services;
         }
     }

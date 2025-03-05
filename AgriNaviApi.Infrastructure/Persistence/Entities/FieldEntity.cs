@@ -43,7 +43,7 @@ namespace AgriNaviApi.Infrastructure.Persistence.Entities
         /// 面積(a)
         /// </summary>
         [Column("field_size")]
-        public int FarmSize { get; set; }
+        public int FieldSize { get; set; }
 
         /// <summary>
         /// グループID
