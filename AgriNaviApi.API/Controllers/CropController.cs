@@ -19,7 +19,7 @@ namespace AgriNaviApi.API.Controllers
         }
 
         /// <summary>
-        /// 圃場テーブルに登録する
+        /// 作付名テーブルに登録する
         /// </summary>
         /// <param name="request">登録用リクエストデータ</param>
         /// <returns></returns>
@@ -43,7 +43,7 @@ namespace AgriNaviApi.API.Controllers
         }
 
         /// <summary>
-        /// 圃場テーブルの詳細情報を取得する
+        /// 作付名テーブルの詳細情報を取得する
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -67,7 +67,7 @@ namespace AgriNaviApi.API.Controllers
         }
 
         /// <summary>
-        /// 圃場テーブルを更新する
+        /// 作付名テーブルを更新する
         /// </summary>
         /// <param name="request">更新用リクエストデータ</param>
         /// <returns></returns>
@@ -90,7 +90,7 @@ namespace AgriNaviApi.API.Controllers
         }
 
         /// <summary>
-        /// 圃場テーブルから削除する
+        /// 作付名テーブルから削除する
         /// </summary>
         /// <param name="request">削除用リクエストデータ</param>
         /// <returns></returns>
@@ -104,7 +104,7 @@ namespace AgriNaviApi.API.Controllers
             }
             catch (InvalidOperationException ex)
             {
-                // 対象圃場が見つからなかった場合などは NotFound を返す
+                // 対象作付名が見つからなかった場合などは NotFound を返す
                 return NotFound(new { message = ex.Message });
             }
             catch (Exception ex)
@@ -114,9 +114,9 @@ namespace AgriNaviApi.API.Controllers
         }
 
         /// <summary>
-        /// 圃場テーブルを検索する
+        /// 作付名テーブルを検索する
         /// </summary>
-        /// <param name="searchCropName">圃場名</param>
+        /// <param name="searchCropName">作付名</param>
         /// <param name="searchMatchType">検索の種類</param>
         /// <returns></returns>
         [HttpGet]
