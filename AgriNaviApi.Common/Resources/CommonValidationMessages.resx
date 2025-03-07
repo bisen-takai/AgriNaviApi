@@ -117,11 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DateKindMessage" xml:space="preserve">
+    <value>開始日と終了日の Kind が一致していません。</value>
+  </data>
+  <data name="DateRangeMessage" xml:space="preserve">
+    <value>終了日は開始日以降でなければなりません。</value>
+  </data>
   <data name="MaxLengthMessage" xml:space="preserve">
     <value>{0}は{1}文字までです。</value>
   </data>
   <data name="PhoneMessage" xml:space="preserve">
     <value>電話番号は10桁または11桁の数字でなければなりません。</value>
+  </data>
+  <data name="propertyNameMessage" xml:space="preserve">
+    <value>プロパティ名が正しくありません。</value>
   </data>
   <data name="RangeMessage" xml:space="preserve">
     <value>{0}は{1}～{2}の範囲で指定してください。</value>

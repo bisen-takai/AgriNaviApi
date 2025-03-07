@@ -61,6 +61,24 @@ namespace AgriNaviApi.Common.Resources {
         }
         
         /// <summary>
+        ///   開始日と終了日の Kind が一致していません。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string DateKindMessage {
+            get {
+                return ResourceManager.GetString("DateKindMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   終了日は開始日以降でなければなりません。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string DateRangeMessage {
+            get {
+                return ResourceManager.GetString("DateRangeMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   {0}は{1}文字までです。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string MaxLengthMessage {
@@ -75,6 +93,15 @@ namespace AgriNaviApi.Common.Resources {
         public static string PhoneMessage {
             get {
                 return ResourceManager.GetString("PhoneMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   プロパティ名が正しくありません。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string propertyNameMessage {
+            get {
+                return ResourceManager.GetString("propertyNameMessage", resourceCulture);
             }
         }
         

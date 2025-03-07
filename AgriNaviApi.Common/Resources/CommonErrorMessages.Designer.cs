@@ -88,6 +88,15 @@ namespace AgriNaviApi.Common.Resources {
         }
         
         /// <summary>
+        ///   プロパティ名が正しくありません。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string propertyNameErrorMessage {
+            get {
+                return ResourceManager.GetString("propertyNameErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   システムエラーが発生しました。後ほど再試行してください。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string SystemErrorMessage {

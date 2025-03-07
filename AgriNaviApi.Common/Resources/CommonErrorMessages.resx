@@ -126,6 +126,9 @@
   <data name="NotFoundMessage" xml:space="preserve">
     <value>{0}が見つかりません。</value>
   </data>
+  <data name="propertyNameErrorMessage" xml:space="preserve">
+    <value>プロパティ名が正しくありません。</value>
+  </data>
   <data name="SystemErrorMessage" xml:space="preserve">
     <value>システムエラーが発生しました。後ほど再試行してください。</value>
   </data>
