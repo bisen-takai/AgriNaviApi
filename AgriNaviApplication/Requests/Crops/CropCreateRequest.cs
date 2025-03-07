@@ -39,6 +39,7 @@ namespace AgriNaviApi.Application.Requests.Crops
         /// <summary>
         /// 備考
         /// </summary>
+        [Display(Name = "備考")]
         [StringLength(200, ErrorMessageResourceName = nameof(CommonValidationMessages.MaxLengthMessage), ErrorMessageResourceType = typeof(CommonValidationMessages))]
         public string? Remark { get; set; }
     }
