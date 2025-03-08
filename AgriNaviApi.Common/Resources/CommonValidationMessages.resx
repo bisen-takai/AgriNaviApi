@@ -123,6 +123,9 @@
   <data name="DateRangeMessage" xml:space="preserve">
     <value>終了日は開始日以降でなければなりません。</value>
   </data>
+  <data name="EmailMessage" xml:space="preserve">
+    <value>有効なメールアドレスを入力してください。</value>
+  </data>
   <data name="MaxLengthMessage" xml:space="preserve">
     <value>{0}は{1}文字までです。</value>
   </data>

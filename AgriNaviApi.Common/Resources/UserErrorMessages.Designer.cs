@@ -22,14 +22,14 @@ namespace AgriNaviApi.Common.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class CommonErrorMessages {
+    public class UserErrorMessages {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal CommonErrorMessages() {
+        internal UserErrorMessages() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace AgriNaviApi.Common.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("AgriNaviApi.Common.Resources.CommonErrorMessages", typeof(CommonErrorMessages).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("AgriNaviApi.Common.Resources.UserErrorMessages", typeof(UserErrorMessages).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,56 +61,38 @@ namespace AgriNaviApi.Common.Resources {
         }
         
         /// <summary>
-        ///   {0}は既に削除済みです。 に類似しているローカライズされた文字列を検索します。
+        ///   無効なログインIDです。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        public static string DeletedMessage {
+        public static string LoginIdErrorMessage {
             get {
-                return ResourceManager.GetString("DeletedMessage", resourceCulture);
+                return ResourceManager.GetString("LoginIdErrorMessage", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   「{0}」は既に利用されています。 に類似しているローカライズされた文字列を検索します。
+        ///   無効なパスワードです。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        public static string DuplicateErrorMessage {
+        public static string PasswordErrorMessage {
             get {
-                return ResourceManager.GetString("DuplicateErrorMessage", resourceCulture);
+                return ResourceManager.GetString("PasswordErrorMessage", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   {0}が見つかりません。 に類似しているローカライズされた文字列を検索します。
+        ///   パスワードのハッシュ化に失敗しました。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        public static string NotFoundMessage {
+        public static string PasswordHashErrorMessage {
             get {
-                return ResourceManager.GetString("NotFoundMessage", resourceCulture);
+                return ResourceManager.GetString("PasswordHashErrorMessage", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   プロパティ名が正しくありません。 に類似しているローカライズされた文字列を検索します。
+        ///   ソルトの形式が正しくありません。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        public static string propertyNameErrorMessage {
+        public static string SaltErrorMessage {
             get {
-                return ResourceManager.GetString("propertyNameErrorMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   システムエラーが発生しました。後ほど再試行してください。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string SystemErrorMessage {
-            get {
-                return ResourceManager.GetString("SystemErrorMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   {0}が指定されていません。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string UnspecifiedErrorMessage {
-            get {
-                return ResourceManager.GetString("UnspecifiedErrorMessage", resourceCulture);
+                return ResourceManager.GetString("SaltErrorMessage", resourceCulture);
             }
         }
     }

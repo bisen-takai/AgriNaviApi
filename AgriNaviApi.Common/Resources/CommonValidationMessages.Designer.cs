@@ -79,6 +79,15 @@ namespace AgriNaviApi.Common.Resources {
         }
         
         /// <summary>
+        ///   有効なメールアドレスを入力してください。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string EmailMessage {
+            get {
+                return ResourceManager.GetString("EmailMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   {0}は{1}文字までです。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string MaxLengthMessage {
