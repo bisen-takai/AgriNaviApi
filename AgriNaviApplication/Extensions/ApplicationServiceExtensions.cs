@@ -41,6 +41,9 @@ namespace AgriNaviApi.Application.Extensions
             services.AddScoped<ISeasonCropScheduleService, SeasonCropScheduleService>();
             services.AddAutoMapper(typeof(SeasonCropScheduleProfile).Assembly);
 
+            services.AddScoped<IUserService, UserService>();
+            services.AddAutoMapper(typeof(UserProfile).Assembly);
+
             return services;
         }
     }
