@@ -47,6 +47,9 @@ namespace AgriNaviApi.Application.Extensions
             services.AddScoped<IShipmentRecordService, ShipmentRecordService>();
             services.AddAutoMapper(typeof(ShipmentRecordProfile).Assembly);
 
+            services.AddScoped<IShipmentRecordDetailService, ShipmentRecordDetailService>();
+            services.AddAutoMapper(typeof(ShipmentRecordDetailProfile).Assembly);
+
             return services;
         }
     }
