@@ -39,7 +39,7 @@ namespace AgriNaviApi.Infrastructure.Persistence.Entities
         /// 圃場エンティティ
         /// </summary>
         [ForeignKey(nameof(FieldId))]
-        public FieldEntity? Field { get; set; } = null!;
+        public FieldEntity Field { get; set; } = null!;
 
         /// <summary>
         /// 作付ID
