@@ -186,26 +186,28 @@ namespace AgriNaviApi.Application.Services
             // usersテーブルからクエリ可能なIQueryableを取得
             var query = _context.Users.AsNoTracking().AsQueryable();
 
+            // 削除していないデータが対象
+            query = query.Where(c => !c.IsDeleted);
+
             if (!string.IsNullOrWhiteSpace(request.SearchUserName))
             {
                 switch (request.SearchMatchType)
                 {
                     case SearchMatchType.EXACT:
-                        query = query.Where(c => c.FullName == request.SearchUserName && !c.IsDeleted);
+                        query = query.Where(c => c.FullName == request.SearchUserName);
                         break;
                     case SearchMatchType.PREFIX:
-                        query = query.Where(c => c.FullName.StartsWith(request.SearchUserName) && !c.IsDeleted);
+                        query = query.Where(c => c.FullName.StartsWith(request.SearchUserName));
                         break;
                     case SearchMatchType.SUFFIX:
-                        query = query.Where(c => c.FullName.EndsWith(request.SearchUserName) && !c.IsDeleted);
+                        query = query.Where(c => c.FullName.EndsWith(request.SearchUserName));
                         break;
                     case SearchMatchType.PARTIAL:
-                        query = query.Where(c => c.FullName.Contains(request.SearchUserName) && !c.IsDeleted);
+                        query = query.Where(c => c.FullName.Contains(request.SearchUserName));
                         break;
                     case SearchMatchType.None:
                     default:
                         // 全件検索とする
-                        query = query.Where(c => !c.IsDeleted);
                         break;
                 }
             }

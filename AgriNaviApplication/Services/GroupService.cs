@@ -154,26 +154,29 @@ namespace AgriNaviApi.Application.Services
             // groupsテーブルからクエリ可能なIQueryableを取得
             var query = _context.Groups.AsNoTracking().AsQueryable();
 
+            // 削除していないデータが対象
+            query = query.Where(c => !c.IsDeleted);
+
             if (!string.IsNullOrWhiteSpace(request.SearchGroupName))
             {
                 switch (request.SearchMatchType)
                 {
                     case SearchMatchType.EXACT:
-                        query = query.Where(c => c.Kind == request.Kind && c.Name == request.SearchGroupName && !c.IsDeleted);
+                        query = query.Where(c => c.Kind == request.Kind && c.Name == request.SearchGroupName);
                         break;
                     case SearchMatchType.PREFIX:
-                        query = query.Where(c => c.Kind == request.Kind && c.Name.StartsWith(request.SearchGroupName) && !c.IsDeleted);
+                        query = query.Where(c => c.Kind == request.Kind && c.Name.StartsWith(request.SearchGroupName));
                         break;
                     case SearchMatchType.SUFFIX:
-                        query = query.Where(c => c.Kind == request.Kind && c.Name.EndsWith(request.SearchGroupName) && !c.IsDeleted);
+                        query = query.Where(c => c.Kind == request.Kind && c.Name.EndsWith(request.SearchGroupName));
                         break;
                     case SearchMatchType.PARTIAL:
-                        query = query.Where(c => c.Kind == request.Kind && c.Name.Contains(request.SearchGroupName) && !c.IsDeleted);
+                        query = query.Where(c => c.Kind == request.Kind && c.Name.Contains(request.SearchGroupName));
                         break;
                     case SearchMatchType.None:
                     default:
                         // 全件検索とする
-                        query = query.Where(c => c.Kind == request.Kind && !c.IsDeleted);
+                        query = query.Where(c => c.Kind == request.Kind);
                         break;
                 }
             }

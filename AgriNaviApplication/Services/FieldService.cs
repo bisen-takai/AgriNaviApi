@@ -154,26 +154,28 @@ namespace AgriNaviApi.Application.Services
             // fieldsテーブルからクエリ可能なIQueryableを取得
             var query = _context.Fields.AsNoTracking().AsQueryable();
 
+            // 削除していないデータが対象
+            query = query.Where(c => !c.IsDeleted);
+
             if (!string.IsNullOrWhiteSpace(request.SearchFieldName))
             {
                 switch (request.SearchMatchType)
                 {
                     case SearchMatchType.EXACT:
-                        query = query.Where(c => c.Name == request.SearchFieldName && !c.IsDeleted);
+                        query = query.Where(c => c.Name == request.SearchFieldName);
                         break;
                     case SearchMatchType.PREFIX:
-                        query = query.Where(c => c.Name.StartsWith(request.SearchFieldName) && !c.IsDeleted);
+                        query = query.Where(c => c.Name.StartsWith(request.SearchFieldName));
                         break;
                     case SearchMatchType.SUFFIX:
-                        query = query.Where(c => c.Name.EndsWith(request.SearchFieldName) && !c.IsDeleted);
+                        query = query.Where(c => c.Name.EndsWith(request.SearchFieldName));
                         break;
                     case SearchMatchType.PARTIAL:
-                        query = query.Where(c => c.Name.Contains(request.SearchFieldName) && !c.IsDeleted);
+                        query = query.Where(c => c.Name.Contains(request.SearchFieldName));
                         break;
                     case SearchMatchType.None:
                     default:
                         // 全件検索とする
-                        query = query.Where(c => !c.IsDeleted);
                         break;
                 }
             }

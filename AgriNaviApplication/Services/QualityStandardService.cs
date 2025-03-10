@@ -154,26 +154,28 @@ namespace AgriNaviApi.Application.Services
             // qualityStandardsテーブルからクエリ可能なIQueryableを取得
             var query = _context.QualityStandards.AsNoTracking().AsQueryable();
 
+            // 削除していないデータが対象
+            query = query.Where(c => !c.IsDeleted);
+
             if (!string.IsNullOrWhiteSpace(request.SearchQualityStandardName))
             {
                 switch (request.SearchMatchType)
                 {
                     case SearchMatchType.EXACT:
-                        query = query.Where(c => c.Name == request.SearchQualityStandardName && !c.IsDeleted);
+                        query = query.Where(c => c.Name == request.SearchQualityStandardName);
                         break;
                     case SearchMatchType.PREFIX:
-                        query = query.Where(c => c.Name.StartsWith(request.SearchQualityStandardName) && !c.IsDeleted);
+                        query = query.Where(c => c.Name.StartsWith(request.SearchQualityStandardName));
                         break;
                     case SearchMatchType.SUFFIX:
-                        query = query.Where(c => c.Name.EndsWith(request.SearchQualityStandardName) && !c.IsDeleted);
+                        query = query.Where(c => c.Name.EndsWith(request.SearchQualityStandardName));
                         break;
                     case SearchMatchType.PARTIAL:
-                        query = query.Where(c => c.Name.Contains(request.SearchQualityStandardName) && !c.IsDeleted);
+                        query = query.Where(c => c.Name.Contains(request.SearchQualityStandardName));
                         break;
                     case SearchMatchType.None:
                     default:
                         // 全件検索とする
-                        query = query.Where(c => !c.IsDeleted);
                         break;
                 }
             }
