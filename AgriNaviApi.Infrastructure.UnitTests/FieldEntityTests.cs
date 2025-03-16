@@ -1,11 +1,6 @@
 ﻿using AgriNaviApi.Common.Enums;
 using AgriNaviApi.Infrastructure.Persistence.Entities;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AgriNaviApi.Infrastructure.UnitTests
 {
