@@ -37,7 +37,7 @@ namespace AgriNaviApi.Infrastructure.Persistence.Entities
         /// </summary>
         [Column("crop_short_name")]
         [StringLength(4)]
-        public string? ShortenName { get; set; }
+        public string? ShortName { get; set; }
 
         /// <summary>
         /// グループID

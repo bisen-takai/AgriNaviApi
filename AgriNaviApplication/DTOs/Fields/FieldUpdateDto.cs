@@ -23,7 +23,7 @@
         /// <summary>
         /// 圃場省略名
         /// </summary>
-        public string? ShortenName { get; set; }
+        public string? ShortName { get; set; }
 
         /// <summary>
         /// 面積(a)

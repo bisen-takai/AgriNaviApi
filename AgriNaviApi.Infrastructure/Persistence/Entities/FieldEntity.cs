@@ -35,14 +35,14 @@ namespace AgriNaviApi.Infrastructure.Persistence.Entities
         /// 圃場名省略名
         /// </summary>
         [Column("field_short_name")]
-        [Required]
         [StringLength(4)]
         public string? ShortName { get; set; }
 
         /// <summary>
-        /// 面積(a)
+        /// 面積(m2)
         /// </summary>
         [Column("field_size")]
+        [Range(0, 100000)]
         public int FieldSize { get; set; }
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace AgriNaviApi.Infrastructure.Persistence.Entities
         /// 削除フラグ
         /// </summary>
         [Column("field_delete_flg")]
-        public bool IsDeleted { get; set; }
+        public bool IsDeleted { get; set; } = false;
 
         /// <summary>
         /// 登録日時

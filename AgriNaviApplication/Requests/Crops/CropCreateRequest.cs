@@ -22,7 +22,7 @@ namespace AgriNaviApi.Application.Requests.Crops
         [Display(Name = "作付名省略名")]
         [Required(ErrorMessageResourceName = nameof(CommonValidationMessages.RequiredMessage), ErrorMessageResourceType = typeof(CommonValidationMessages))]
         [StringLength(4, ErrorMessageResourceName = nameof(CommonValidationMessages.MaxLengthMessage), ErrorMessageResourceType = typeof(CommonValidationMessages))]
-        public string? ShortenName { get; set; }
+        public string? ShortName { get; set; }
 
         /// <summary>
         /// グループID

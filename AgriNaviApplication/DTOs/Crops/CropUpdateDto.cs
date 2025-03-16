@@ -23,7 +23,7 @@
         /// <summary>
         /// 作付名省略名
         /// </summary>
-        public string? ShortenName { get; set; }
+        public string? ShortName { get; set; }
 
         /// <summary>
         /// グループID
