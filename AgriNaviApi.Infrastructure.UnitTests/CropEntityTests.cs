@@ -67,6 +67,28 @@ namespace AgriNaviApi.Infrastructure.UnitTests
         }
 
         /// <summary>
+        /// 境界値の正常確認テスト
+        /// </summary>
+        [Fact]
+        public void BoundaryValue_Normal()
+        {
+            var entity = new CropEntity
+            {
+                Name = new string('a', 20),
+                ShortName = "abcd",
+                GroupId = 1,
+                ColorId = 1,
+                Remark = new string('a', 200)
+            };
+
+            Assert.Equal(new string('a', 20), entity.Name);
+            Assert.Equal("abcd", entity.ShortName);
+            Assert.Equal(1, entity.GroupId);
+            Assert.Equal(1, entity.ColorId);
+            Assert.Equal(new string('a', 200), entity.Remark);
+        }
+
+        /// <summary>
         /// 作付名文字数超過チェック
         /// </summary>
         [Theory]
@@ -119,7 +141,7 @@ namespace AgriNaviApi.Infrastructure.UnitTests
             var entity = new CropEntity
             {
                 Name = new string('a', 20),
-                ShortName = "abcde",
+                ShortName = "abcd",
                 GroupId = 1,
                 ColorId = 1,
                 Remark = new string('a', 201) // 201文字にして StringLength(200) を超過
@@ -129,6 +151,5 @@ namespace AgriNaviApi.Infrastructure.UnitTests
             Assert.Throws<ValidationException>(() =>
                 Validator.ValidateObject(entity, validationContext, validateAllProperties: true));
         }
-
     }
 }
