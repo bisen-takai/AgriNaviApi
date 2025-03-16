@@ -36,13 +36,14 @@ namespace AgriNaviApi.Infrastructure.Persistence.Entities
         /// グループ種別
         /// </summary>
         [Column("group_kind")]
+        [EnumDataType(typeof(GroupKind))]
         public GroupKind Kind { get; set; }
 
         /// <summary>
         /// 削除フラグ
         /// </summary>
         [Column("group_delete_flg")]
-        public bool IsDeleted { get; set; }
+        public bool IsDeleted { get; set; } = false;
 
         /// <summary>
         /// 登録日時
