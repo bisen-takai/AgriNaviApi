@@ -63,6 +63,7 @@ namespace AgriNaviApi.Infrastructure.Persistence.Entities
         /// 数量
         /// </summary>
         [Column("shipment_record_detail_quantity")]
+        [Range(0, 100000)]
         public int Quantity { get; set; }
 
         /// <summary>
@@ -81,6 +82,7 @@ namespace AgriNaviApi.Infrastructure.Persistence.Entities
         /// 金額
         /// </summary>
         [Column("shipment_record_detail_amount")]
+        [Range(0, 1000000)]
         public int Amount { get; set; }
 
         /// <summary>

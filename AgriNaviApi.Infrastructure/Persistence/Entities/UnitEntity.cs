@@ -29,13 +29,13 @@ namespace AgriNaviApi.Infrastructure.Persistence.Entities
         [Column("unit_name")]
         [Required]
         [StringLength(20)]
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         /// <summary>
         /// 削除フラグ
         /// </summary>
         [Column("unit_delete_flg")]
-        public bool IsDeleted { get; set; }
+        public bool IsDeleted { get; set; } = false;
 
         /// <summary>
         /// 登録日時

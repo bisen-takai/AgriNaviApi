@@ -74,12 +74,14 @@ namespace AgriNaviApi.Infrastructure.Persistence.Entities
         /// 住所
         /// </summary>
         [Column("user_address")]
+        [StringLength(30)]
         public string? Address { get; set; }
 
         /// <summary>
         /// 権限ID
         /// </summary>
         [Column("privilege_id")]
+        [EnumDataType(typeof(PrivilegeKind))]
         public PrivilegeKind PrivilegeId { get; set; }
 
         /// <summary>
@@ -105,7 +107,7 @@ namespace AgriNaviApi.Infrastructure.Persistence.Entities
         /// 削除フラグ
         /// </summary>
         [Column("user_delete_flg")]
-        public bool IsDeleted { get; set; }
+        public bool IsDeleted { get; set; } = false;
 
         /// <summary>
         /// 登録日時

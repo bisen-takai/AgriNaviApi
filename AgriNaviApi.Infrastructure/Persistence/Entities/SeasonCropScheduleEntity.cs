@@ -66,7 +66,7 @@ namespace AgriNaviApi.Infrastructure.Persistence.Entities
         /// 削除フラグ
         /// </summary>
         [Column("season_crop_schedule_delete_flg")]
-        public bool IsDeleted { get; set; }
+        public bool IsDeleted { get; set; } = false;
 
         /// <summary>
         /// 登録日時

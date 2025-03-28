@@ -76,7 +76,7 @@ namespace AgriNaviApi.Infrastructure.Persistence.Entities
         /// 削除フラグ
         /// </summary>
         [Column("shipment_record_delete_flg")]
-        public bool IsDeleted { get; set; }
+        public bool IsDeleted { get; set; } = false;
 
         /// <summary>
         /// 登録日時
@@ -108,8 +108,9 @@ namespace AgriNaviApi.Infrastructure.Persistence.Entities
         /// <param name="crop">作付名エンティティ</param>
         /// <param name="seasonCropSchedule">作付計画エンティティ</param>
         /// <exception cref="ArgumentNullException"></exception>
-        public ShipmentRecordEntity(CropEntity crop, SeasonCropScheduleEntity seasonCropSchedule)
+        public ShipmentRecordEntity(FieldEntity field, CropEntity crop, SeasonCropScheduleEntity seasonCropSchedule)
         {
+            Field = field ?? throw new ArgumentNullException(nameof(field));
             Crop = crop ?? throw new ArgumentNullException(nameof(crop));
             SeasonCropSchedule = seasonCropSchedule ?? throw new ArgumentNullException(nameof(seasonCropSchedule));
         }

@@ -1,11 +1,6 @@
 ﻿using AgriNaviApi.Common.Enums;
 using AgriNaviApi.Infrastructure.Persistence.Entities;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AgriNaviApi.Infrastructure.UnitTests
 {
@@ -37,8 +32,12 @@ namespace AgriNaviApi.Infrastructure.UnitTests
                 Kind = GroupKind.Other,
             };
 
-            Assert.Equal(new string('a', 20), entity.Name);
-            Assert.Equal(GroupKind.Other, entity.Kind);
+            var errorResults = new List<ValidationResult>();
+            var context = new ValidationContext(entity);
+            bool isValid = Validator.TryValidateObject(entity, context, errorResults, true);
+
+            Assert.True(isValid);
+            Assert.Empty(errorResults);
         }
 
         /// <summary>

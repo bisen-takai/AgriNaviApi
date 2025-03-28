@@ -81,11 +81,12 @@ namespace AgriNaviApi.Infrastructure.UnitTests
                 Remark = new string('a', 200)
             };
 
-            Assert.Equal(new string('a', 20), entity.Name);
-            Assert.Equal("abcd", entity.ShortName);
-            Assert.Equal(1, entity.GroupId);
-            Assert.Equal(1, entity.ColorId);
-            Assert.Equal(new string('a', 200), entity.Remark);
+            var errorResults = new List<ValidationResult>();
+            var context = new ValidationContext(entity);
+            bool isValid = Validator.TryValidateObject(entity, context, errorResults, true);
+
+            Assert.True(isValid);
+            Assert.Empty(errorResults);
         }
 
         /// <summary>
