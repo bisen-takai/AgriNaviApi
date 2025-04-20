@@ -238,6 +238,13 @@ namespace AgriNaviApi.Application.Services
                 throw new InvalidOperationException(UserErrorMessages.LoginIdErrorMessage);
             }
 
+            if (user.IsDeleted)
+            {
+                // 既に削除済みの場合
+                string message = string.Format(CommonErrorMessages.DeletedMessage, TableName);
+                throw new InvalidOperationException(message);
+            }
+
             var hashedPassword = _passwordHasher.HashPassword(request.Password, user.Salt);
             if (user.PasswordHash != hashedPassword)
             {
