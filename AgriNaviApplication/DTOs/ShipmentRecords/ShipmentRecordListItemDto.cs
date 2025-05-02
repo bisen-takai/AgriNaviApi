@@ -56,10 +56,5 @@ namespace AgriNaviApi.Application.DTOs.ShipmentRecords
         /// 備考
         /// </summary>
         public string? Remark { get; set; }
-
-        /// <summary>
-        /// 出荷詳細エンティティのコレクション
-        /// </summary>
-        public ICollection<ShipmentRecordDetailEntity>? Details { get; set; }
     }
 }

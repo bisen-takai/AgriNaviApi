@@ -66,10 +66,5 @@ namespace AgriNaviApi.Application.DTOs.ShipmentRecords
         /// 最終更新日時
         /// </summary>
         public DateTime LastUpdatedAt { get; set; } = DateTime.UtcNow;
-
-        /// <summary>
-        /// 出荷詳細エンティティのコレクション
-        /// </summary>
-        public ICollection<ShipmentRecordDetailEntity>? Details { get; set; }
     }
 }

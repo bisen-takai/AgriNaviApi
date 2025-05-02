@@ -38,7 +38,7 @@ namespace AgriNaviApi.Application.Interfaces
         /// <param name="request"></param>
         /// <returns></returns>
         /// <exception cref="InvalidOperationException"></exception>
-        public Task<ShipmentRecordDetailDeleteDto> DeleteShipmentRecordDetailAsync(ShipmentRecordDetailDeleteRequest request);
+        public Task<ShipmentRecordDetailDeleteDto> DeleteShipmentRecordDetailAsync(int id);
 
         /// <summary>
         /// 出荷記録詳細テーブルを検索する

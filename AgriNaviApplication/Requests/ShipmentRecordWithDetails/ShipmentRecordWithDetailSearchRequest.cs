@@ -5,7 +5,7 @@ namespace AgriNaviApi.Application.Requests.ShipmentRecords
     /// <summary>
     /// 出荷記録検索リクエスト
     /// </summary>
-    public class ShipmentRecordSearchRequest
+    public class ShipmentRecordWithDetailSearchRequest
     {
         /// <summary>
         /// 年間作付計画ID

@@ -81,9 +81,11 @@ namespace AgriNaviApi.Application.Services
         /// <exception cref="KeyNotFoundException"></exception>
         public async Task<ShipmentRecordUpdateDto> UpdateShipmentRecordAsync(ShipmentRecordUpdateRequest request)
         {
-            var shipmentRecord = await _context.ShipmentRecords.FindAsync(request.Id);
+            var shipmentRecord = await _context.ShipmentRecords
+                .Include(r => r.Details)
+                .FirstOrDefaultAsync(r => r.Id == request.Id && !r.IsDeleted);
 
-            if (shipmentRecord == null || shipmentRecord.IsDeleted)
+            if (shipmentRecord == null)
             {
                 string message = string.Format(CommonErrorMessages.NotFoundMessage, TableName);
                 throw new KeyNotFoundException(message);
@@ -105,9 +107,9 @@ namespace AgriNaviApi.Application.Services
         /// <param name="request"></param>
         /// <returns></returns>
         /// <exception cref="InvalidOperationException"></exception>
-        public async Task<ShipmentRecordDeleteDto> DeleteShipmentRecordAsync(ShipmentRecordDeleteRequest request)
+        public async Task<ShipmentRecordDeleteDto> DeleteShipmentRecordAsync(int id)
         {
-            var shipmentRecord = await _context.ShipmentRecords.FindAsync(request.Id);
+            var shipmentRecord = await _context.ShipmentRecords.FindAsync(id);
 
             if (shipmentRecord == null)
             {
@@ -119,7 +121,7 @@ namespace AgriNaviApi.Application.Services
             {
                 // 既に削除済みの場合
                 string message = string.Format(CommonErrorMessages.DeletedMessage, TableName);
-                throw new InvalidOperationException(message);
+                throw new AlreadyDeletedException(message);
             }
 
             shipmentRecord.IsDeleted = true;
@@ -143,29 +145,30 @@ namespace AgriNaviApi.Application.Services
         public async Task<ShipmentRecordSearchDto> SearchShipmentRecordAsync(ShipmentRecordSearchRequest request)
         {
             // shipmentRecordsテーブルからクエリ可能なIQueryableを取得
-            var query = _context.ShipmentRecords.AsNoTracking().AsQueryable();
+            var shipmentRecord = _context.ShipmentRecords
+                .AsNoTracking()
+                .Where(r => !r.IsDeleted);
 
-            // 削除していないデータが対象
-            query = query.Where(c => !c.IsDeleted);
+            if (request.SeasonCropScheduleId > 0)
+            {
+                shipmentRecord = shipmentRecord.Where(r => r.SeasonCropScheduleId == request.SeasonCropScheduleId);
+            }
+            else
+            {
+                if (request.StartDate != null)
+                {
+                    // request.StartDate 以降のデータを取得
+                    shipmentRecord = shipmentRecord.Where(c => c.RecordDate >= request.StartDate);
+                }
 
-            // EndDateが指定されているかどうかで条件を分ける
-            if (request.StartDate != null && request.EndDate != null)
-            {
-                // request.StartDate 以降かつ request.EndDate 以下のデータを取得
-                query = query.Where(c => c.RecordDate >= request.StartDate && c.RecordDate <= request.EndDate);
-            }
-            else if (request.StartDate != null)
-            {
-                // request.StartDate 以降のデータを取得
-                query = query.Where(c => c.RecordDate >= request.StartDate);
-            }
-            else if (request.EndDate != null)
-            {
-                // request.EndDate 以下のデータを取得
-                query = query.Where(c => c.RecordDate <= request.EndDate);
+                if (request.EndDate != null)
+                {
+                    // request.EndDate 以下のデータを取得
+                    shipmentRecord = shipmentRecord.Where(c => c.RecordDate <= request.EndDate);
+                }
             }
 
-            var shipmentRecords = await query.ToListAsync();
+            var shipmentRecords = await shipmentRecord.ToListAsync();
 
             return new ShipmentRecordSearchDto
             {

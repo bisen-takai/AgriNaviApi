@@ -8,13 +8,13 @@ namespace AgriNaviApi.API.Controllers
 {
     [Route("api/[controller]s")]
     [ApiController]
-    public class ShipmentRecordController : Controller
+    public class ShipmentRecordWithDetailController : Controller
     {
-        private readonly IShipmentRecordService _shipmentRecordService;
+        private readonly IShipmentRecordWithDetailService _shipmentRecordWithDetailService;
 
-        public ShipmentRecordController(IShipmentRecordService shipmentRecordService)
+        public ShipmentRecordWithDetailController(IShipmentRecordWithDetailService shipmentRecordWithDetailService)
         {
-            _shipmentRecordService = shipmentRecordService;
+            _shipmentRecordWithDetailService = shipmentRecordWithDetailService;
         }
 
         /// <summary>
@@ -23,11 +23,11 @@ namespace AgriNaviApi.API.Controllers
         /// <param name="request">登録用リクエストデータ</param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<ActionResult<ShipmentRecordCreateDto>> CreateShipmentRecord([FromBody] ShipmentRecordCreateRequest request)
+        public async Task<ActionResult<ShipmentRecordWithDetailCreateDto>> CreateShipmentRecord([FromBody] ShipmentRecordWithDetailCreateRequest request)
         {
             try
             {
-                var createdShipmentRecord = await _shipmentRecordService.CreateShipmentRecordAsync(request);
+                var createdShipmentRecord = await _shipmentRecordWithDetailService.CreateShipmentRecordAsync(request);
                 return CreatedAtAction(nameof(GetShipmentRecordById), new { id = createdShipmentRecord.Id }, createdShipmentRecord);
             }
             catch (Exception ex)
@@ -42,11 +42,11 @@ namespace AgriNaviApi.API.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public async Task<ActionResult<ShipmentRecordDetailDto>> GetShipmentRecordById(int id)
+        public async Task<ActionResult<ShipmentRecordWithDetailDetailDto>> GetShipmentRecordById(int id)
         {
             try
             {
-                var createdShipmentRecord = await _shipmentRecordService.GetShipmentRecordByIdAsync(id);
+                var createdShipmentRecord = await _shipmentRecordWithDetailService.GetShipmentRecordByIdAsync(id);
                 return Ok(createdShipmentRecord);
 
             }
@@ -66,11 +66,11 @@ namespace AgriNaviApi.API.Controllers
         /// <param name="request">更新用リクエストデータ</param>
         /// <returns></returns>
         [HttpPut("{id}")]
-        public async Task<ActionResult<ShipmentRecordUpdateDto>> UpdateShipmentRecord(int id, [FromBody] ShipmentRecordUpdateRequest request)
+        public async Task<ActionResult<ShipmentRecordWithDetailUpdateDto>> UpdateShipmentRecord(int id, [FromBody] ShipmentRecordWithDetailUpdateRequest request)
         {
             try
             {
-                var updatedShipmentRecord = await _shipmentRecordService.UpdateShipmentRecordAsync(request);
+                var updatedShipmentRecord = await _shipmentRecordWithDetailService.UpdateShipmentRecordAsync(request);
                 return Ok(updatedShipmentRecord);
             }
             catch (KeyNotFoundException ex)
@@ -93,16 +93,16 @@ namespace AgriNaviApi.API.Controllers
         {
             try
             {
-                var deletedResult = await _shipmentRecordService.DeleteShipmentRecordAsync(id);
+                var deletedResult = await _shipmentRecordWithDetailService.DeleteShipmentRecordAsync(id);
                 return NoContent();
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(new { message = ex.Message });
             }
             catch (AlreadyDeletedException ex)
             {
                 return Conflict(new { message = ex.Message });
-            }
-            catch (InvalidOperationException ex)
-            {
-                return NotFound(new { message = ex.Message });
             }
             catch (Exception ex)
             {
@@ -124,14 +124,14 @@ namespace AgriNaviApi.API.Controllers
         {
             try
             {
-                var request = new ShipmentRecordSearchRequest
+                var request = new ShipmentRecordWithDetailSearchRequest
                 {
                     SeasonCropScheduleId = seasonCropScheduleId,
                     StartDate = startDate,
                     EndDate = endDate
                 };
 
-                var searchResult = await _shipmentRecordService.SearchShipmentRecordAsync(request);
+                var searchResult = await _shipmentRecordWithDetailService.SearchShipmentRecordAsync(request);
                 return Ok(searchResult);
             }
             catch (Exception ex)

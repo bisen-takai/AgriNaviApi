@@ -88,12 +88,16 @@ namespace AgriNaviApi.API.Controllers
         /// <param name="request">削除用リクエストデータ</param>
         /// <returns></returns>
         [HttpDelete]
-        public async Task<IActionResult> DeleteShipmentRecordDetail([FromBody] ShipmentRecordDetailDeleteRequest request)
+        public async Task<IActionResult> DeleteShipmentRecordDetail(int id)
         {
             try
             {
-                var deletedResult = await _shipmentRecordDetailService.DeleteShipmentRecordDetailAsync(request);
+                var deletedResult = await _shipmentRecordDetailService.DeleteShipmentRecordDetailAsync(id);
                 return Ok(deletedResult);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(new { message = ex.Message });
             }
             catch (Exception ex)
             {

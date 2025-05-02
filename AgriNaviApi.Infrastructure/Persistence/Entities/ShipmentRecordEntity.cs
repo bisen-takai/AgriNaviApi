@@ -93,7 +93,7 @@ namespace AgriNaviApi.Infrastructure.Persistence.Entities
         /// <summary>
         /// 出荷詳細エンティティのコレクション
         /// </summary>
-        public ICollection<ShipmentRecordDetailEntity>? Details { get; set; }
+        public ICollection<ShipmentRecordDetailEntity> Details { get; set; } = new List<ShipmentRecordDetailEntity>();
 
         /// <summary>
         /// EF Coreマッピング用

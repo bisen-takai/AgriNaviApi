@@ -46,11 +46,5 @@ namespace AgriNaviApi.Application.Requests.ShipmentRecords
         [Display(Name = "備考")]
         [StringLength(200, ErrorMessageResourceName = nameof(CommonValidationMessages.MaxLengthMessage), ErrorMessageResourceType = typeof(CommonValidationMessages))]
         public string? Remark { get; set; }
-
-        /// <summary>
-        /// 出荷詳細エンティティのコレクション
-        /// </summary>
-        [Display(Name = "出荷詳細")]
-        public ICollection<ShipmentRecordDetailEntity>? Details { get; set; }
     }
 }

@@ -1,13 +1,22 @@
-﻿using AgriNaviApi.Common.Resources;
+﻿using AgriNaviApi.Application.Requests.ShipmentRecordDetails;
+using AgriNaviApi.Common.Resources;
+using AgriNaviApi.Infrastructure.Persistence.Entities;
 using System.ComponentModel.DataAnnotations;
 
 namespace AgriNaviApi.Application.Requests.ShipmentRecords
 {
     /// <summary>
-    /// 出荷記録追加リクエスト
+    /// 出荷記録更新リクエスト
     /// </summary>
-    public class ShipmentRecordCreateRequest
+    public class ShipmentRecordWithDetailUpdateRequest
     {
+        /// <summary>
+        /// 出荷記録ID
+        /// </summary>
+        [Display(Name = "出荷記録ID")]
+        [Required(ErrorMessageResourceName = nameof(CommonValidationMessages.RequiredMessage), ErrorMessageResourceType = typeof(CommonValidationMessages))]
+        public int Id { get; set; }
+
         /// <summary>
         /// 日付
         /// </summary>
@@ -38,5 +47,11 @@ namespace AgriNaviApi.Application.Requests.ShipmentRecords
         [Display(Name = "備考")]
         [StringLength(200, ErrorMessageResourceName = nameof(CommonValidationMessages.MaxLengthMessage), ErrorMessageResourceType = typeof(CommonValidationMessages))]
         public string? Remark { get; set; }
+
+        /// <summary>
+        /// 出荷詳細エンティティのコレクション
+        /// </summary>
+        [Display(Name = "出荷詳細")]
+        public ICollection<ShipmentRecordDetailUpdateRequest> Details { get; set; } = new List<ShipmentRecordDetailUpdateRequest>();
     }
 }

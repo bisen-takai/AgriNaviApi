@@ -1,11 +1,12 @@
-﻿using AgriNaviApi.Infrastructure.Persistence.Entities;
+﻿using AgriNaviApi.Application.DTOs.ShipmentRecordDetails;
+using AgriNaviApi.Infrastructure.Persistence.Entities;
 
 namespace AgriNaviApi.Application.DTOs.ShipmentRecords
 {
     /// <summary>
-    /// 出荷記録登録レスポンス
+    /// 出荷記録更新レスポンス
     /// </summary>
-    public class ShipmentRecordCreateDto
+    public class ShipmentRecordWithDetailUpdateDto
     {
         /// <summary>
         /// 出荷記録ID(自動インクリメントID)
@@ -30,7 +31,7 @@ namespace AgriNaviApi.Application.DTOs.ShipmentRecords
         /// <summary>
         /// 圃場名
         /// </summary>
-        public string? FieldName { get; set; }
+        public string FieldName { get; set; }
 
         /// <summary>
         /// 作付ID
@@ -58,13 +59,13 @@ namespace AgriNaviApi.Application.DTOs.ShipmentRecords
         public string? Remark { get; set; }
 
         /// <summary>
-        /// 登録日時
-        /// </summary>
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-
-        /// <summary>
         /// 最終更新日時
         /// </summary>
         public DateTime LastUpdatedAt { get; set; } = DateTime.UtcNow;
+
+        /// <summary>
+        /// 出荷詳細エンティティのコレクション
+        /// </summary>
+        public ICollection<ShipmentRecordDetailUpdateDto> Details { get; set; } = new List<ShipmentRecordDetailUpdateDto>();
     }
 }

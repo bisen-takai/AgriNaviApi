@@ -7,7 +7,6 @@ namespace AgriNaviApi.Application.Requests.ShipmentRecordDetails
     /// </summary>
     public class ShipmentRecordDetailSearchRequest
     {
-
         /// <summary>
         /// 出荷記録ID
         /// </summary>
