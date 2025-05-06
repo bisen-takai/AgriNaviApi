@@ -18,6 +18,8 @@ namespace AgriNaviApi.Common.Extensions
         {
             services.AddScoped<IUuidGenerator, UuidGenerator>();
             services.AddScoped<IDateTimeProvider, SystemDateTimeProvider>();
+            services.AddScoped<ISaltGenerator, SaltGenerator>();
+            services.AddScoped<IPasswordHasher, PasswordHasher>();
 
             return services;
         }
