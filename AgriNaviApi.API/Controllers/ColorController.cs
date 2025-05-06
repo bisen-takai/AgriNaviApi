@@ -71,8 +71,8 @@ namespace AgriNaviApi.API.Controllers
         /// </summary>
         /// <param name="request">更新用リクエストデータ</param>
         /// <returns></returns>
-        [HttpPut]
-        public async Task<ActionResult<ColorUpdateDto>> UpdateColor([FromBody] ColorUpdateRequest request)
+        [HttpPut("{id}")]
+        public async Task<ActionResult<ColorUpdateDto>> UpdateColor(int id, [FromBody] ColorUpdateRequest request)
         {
             try
             {
@@ -94,12 +94,12 @@ namespace AgriNaviApi.API.Controllers
         /// </summary>
         /// <param name="request">削除用リクエストデータ</param>
         /// <returns></returns>
-        [HttpDelete]
-        public async Task<IActionResult> DeleteColor([FromBody] ColorDeleteRequest request)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteColor(int id)
         {
             try
             {
-                var deletedResult = await _colorService.DeleteColorAsync(request);
+                var deletedResult = await _colorService.DeleteColorAsync(id);
                 return Ok(deletedResult);
             }
             catch (InvalidOperationException ex)
@@ -121,7 +121,7 @@ namespace AgriNaviApi.API.Controllers
         /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> SearchColors(
-            [FromQuery] string searchColorName,
+            [FromQuery] string? searchColorName,
             [FromQuery] SearchMatchType searchMatchType = SearchMatchType.None)
         {
             try

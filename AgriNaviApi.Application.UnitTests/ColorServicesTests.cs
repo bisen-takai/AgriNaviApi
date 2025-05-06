@@ -316,12 +316,7 @@ namespace AgriNaviApi.Application.UnitTests
                 _mapper,
                 _dateTimeProviderMock.Object);
 
-            var deleteRequest = new ColorDeleteRequest
-            {
-                Id = testColor.Id
-            };
-
-            var deleteResult = await service.DeleteColorAsync(deleteRequest);
+            var deleteResult = await service.DeleteColorAsync(testColor.Id);
 
             Assert.NotNull(deleteResult);
             Assert.Equal(testColor.Id, deleteResult.Id);
@@ -351,14 +346,9 @@ namespace AgriNaviApi.Application.UnitTests
                 _mapper,
                 _dateTimeProviderMock.Object);
 
-            var deleteRequest = new ColorDeleteRequest
-            {
-                Id = 999 // ë∂ç›ÇµÇ»Ç¢ID
-            };
-
             // InvalidOperationExceptionÇ∆Ç»ÇÈÇ±Ç∆ÇämîF
             await Assert.ThrowsAsync<InvalidOperationException>(
-                async () => await service.DeleteColorAsync(deleteRequest));
+                async () => await service.DeleteColorAsync(999));
         }
 
         /// <summary>

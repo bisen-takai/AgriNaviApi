@@ -157,7 +157,7 @@ namespace AgriNaviApi.API.UnitTests
                 .Setup(s => s.UpdateColorAsync(updateRequest))
                 .ReturnsAsync(updateDto);
 
-            var actionResult = await _controller.UpdateColor(updateRequest);
+            var actionResult = await _controller.UpdateColor(1, updateRequest);
 
             var okResult = Assert.IsType<OkObjectResult>(actionResult.Result);
             var returnedDto = Assert.IsType<ColorUpdateDto>(okResult.Value);
@@ -177,7 +177,7 @@ namespace AgriNaviApi.API.UnitTests
                 .Setup(s => s.UpdateColorAsync(updateRequest))
                 .ThrowsAsync(new KeyNotFoundException(exceptionMessage));
 
-            var actionResult = await _controller.UpdateColor(updateRequest);
+            var actionResult = await _controller.UpdateColor(1, updateRequest);
 
             var notFoundResult = Assert.IsType<NotFoundObjectResult>(actionResult.Result);
             var resultValue = notFoundResult.Value;
@@ -194,7 +194,6 @@ namespace AgriNaviApi.API.UnitTests
         [Fact]
         public async Task DeleteColor_Normal()
         {
-            var deleteRequest = new ColorDeleteRequest { Id = 1 };
             var deleteDto = new ColorDeleteDto
             {
                 Id = 1,
@@ -203,10 +202,10 @@ namespace AgriNaviApi.API.UnitTests
             };
 
             _colorServiceMock
-                .Setup(s => s.DeleteColorAsync(deleteRequest))
+                .Setup(s => s.DeleteColorAsync(1))
                 .ReturnsAsync(deleteDto);
 
-            var actionResult = await _controller.DeleteColor(deleteRequest);
+            var actionResult = await _controller.DeleteColor(1);
 
             var okResult = Assert.IsType<OkObjectResult>(actionResult);
             var returnedDto = Assert.IsType<ColorDeleteDto>(okResult.Value);
@@ -221,13 +220,12 @@ namespace AgriNaviApi.API.UnitTests
         [Fact]
         public async Task DeleteColor_InvalidOperationExceptionThrown()
         {
-            var deleteRequest = new ColorDeleteRequest { Id = 1 };
             var exceptionMessage = "ƒJƒ‰[‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñB";
             _colorServiceMock
-                .Setup(s => s.DeleteColorAsync(deleteRequest))
+                .Setup(s => s.DeleteColorAsync(1))
                 .ThrowsAsync(new InvalidOperationException(exceptionMessage));
 
-            var actionResult = await _controller.DeleteColor(deleteRequest);
+            var actionResult = await _controller.DeleteColor(1);
 
             var notFoundResult = Assert.IsType<NotFoundObjectResult>(actionResult);
             var resultValue = notFoundResult.Value;

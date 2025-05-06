@@ -34,7 +34,7 @@ namespace AgriNaviApi.Application.Interfaces
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public Task<ColorDeleteDto> DeleteColorAsync(ColorDeleteRequest request);
+        public Task<ColorDeleteDto> DeleteColorAsync(int id);
 
         /// <summary>
         /// カラーテーブルを検索する

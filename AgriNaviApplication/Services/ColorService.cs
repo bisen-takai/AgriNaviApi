@@ -111,9 +111,9 @@ namespace AgriNaviApi.Application.Services
         /// </summary>
         /// <param name="request">削除用リクエストデータ</param>
         /// <returns></returns>
-        public async Task<ColorDeleteDto> DeleteColorAsync(ColorDeleteRequest request)
+        public async Task<ColorDeleteDto> DeleteColorAsync(int id)
         {
-            var color = await _context.Colors.FindAsync(request.Id);
+            var color = await _context.Colors.FindAsync(id);
 
             if (color == null)
             {
