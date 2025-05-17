@@ -23,6 +23,12 @@ namespace AgriNaviApi.Application.Requests.SeasonCropSchedules
         public SearchMatchType SearchMatchType { get; set; } = SearchMatchType.None;
 
         /// <summary>
+        /// 作付ID
+        /// </summary>
+        [Display(Name = "作付ID")]
+        public int? CropId { get; set; }
+
+        /// <summary>
         /// 計画開始年月
         /// </summary>
         [Display(Name = "計画開始年月")]

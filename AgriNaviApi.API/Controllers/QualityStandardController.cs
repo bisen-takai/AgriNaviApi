@@ -71,8 +71,8 @@ namespace AgriNaviApi.API.Controllers
         /// </summary>
         /// <param name="request">更新用リクエストデータ</param>
         /// <returns></returns>
-        [HttpPut]
-        public async Task<ActionResult<QualityStandardUpdateDto>> UpdateQualityStandard([FromBody] QualityStandardUpdateRequest request)
+        [HttpPut("{id}")]
+        public async Task<ActionResult<QualityStandardUpdateDto>> UpdateQualityStandard(int id, [FromBody] QualityStandardUpdateRequest request)
         {
             try
             {
@@ -94,12 +94,12 @@ namespace AgriNaviApi.API.Controllers
         /// </summary>
         /// <param name="request">削除用リクエストデータ</param>
         /// <returns></returns>
-        [HttpDelete]
-        public async Task<IActionResult> DeleteQualityStandard([FromBody] QualityStandardDeleteRequest request)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteQualityStandard(int id)
         {
             try
             {
-                var deletedResult = await _qualityStandardService.DeleteQualityStandardAsync(request);
+                var deletedResult = await _qualityStandardService.DeleteQualityStandardAsync(id);
                 return Ok(deletedResult);
             }
             catch (InvalidOperationException ex)
@@ -121,7 +121,7 @@ namespace AgriNaviApi.API.Controllers
         /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> SearchQualityStandards(
-            [FromQuery] string searchQualityStandardName,
+            [FromQuery] string? searchQualityStandardName,
             [FromQuery] SearchMatchType searchMatchType = SearchMatchType.None)
         {
             try

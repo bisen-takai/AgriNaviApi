@@ -69,7 +69,11 @@ namespace AgriNaviApi.Application.Services
         /// <exception cref="KeyNotFoundException"></exception>
         public async Task<CropDetailDto> GetCropByIdAsync(int id)
         {
-            var crop = await _context.Crops.FindAsync(id);
+            var crop = await _context.Crops
+                .Include(f => f.Group)
+                .Include(f => f.Color)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(f => f.Id == id);
 
             if (crop == null || crop.IsDeleted)
             {
@@ -114,9 +118,9 @@ namespace AgriNaviApi.Application.Services
         /// <param name="request"></param>
         /// <returns></returns>
         /// <exception cref="InvalidOperationException"></exception>
-        public async Task<CropDeleteDto> DeleteCropAsync(CropDeleteRequest request)
+        public async Task<CropDeleteDto> DeleteCropAsync(int id)
         {
-            var crop = await _context.Crops.FindAsync(request.Id);
+            var crop = await _context.Crops.FindAsync(id);
 
             if (crop == null)
             {
@@ -152,10 +156,18 @@ namespace AgriNaviApi.Application.Services
         public async Task<CropSearchDto> SearchCropAsync(CropSearchRequest request)
         {
             // cropsテーブルからクエリ可能なIQueryableを取得
-            var query = _context.Crops.AsNoTracking().AsQueryable();
+            var query = _context.Crops
+                .Include(f => f.Group)
+                .Include(f => f.Color)
+                .AsNoTracking().AsQueryable();
 
             // 削除していないデータが対象
             query = query.Where(c => !c.IsDeleted);
+
+            if (request.GroupId != null)
+            {
+                query = query.Where(c => c.GroupId == request.GroupId);
+            }
 
             if (!string.IsNullOrWhiteSpace(request.SearchCropName))
             {

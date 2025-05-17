@@ -20,7 +20,7 @@ namespace AgriNaviApi.Application.Requests.Groups
         /// </summary>
         [Display(Name = "グループ種別")]
         [Range(0, 3, ErrorMessageResourceName = nameof(CommonValidationMessages.RangeMessage), ErrorMessageResourceType = typeof(CommonValidationMessages))]
-        public GroupKind Kind { get; set; }
+        public GroupKind? Kind { get; set; }
 
         /// <summary>
         /// 検索一致タイプ

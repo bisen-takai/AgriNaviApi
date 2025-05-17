@@ -34,7 +34,7 @@ namespace AgriNaviApi.Application.Interfaces
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public Task<ShippingDestinationDeleteDto> DeleteShippingDestinationAsync(ShippingDestinationDeleteRequest request);
+        public Task<ShippingDestinationDeleteDto> DeleteShippingDestinationAsync(int id);
 
         /// <summary>
         /// 出荷先名テーブルを検索する

@@ -1,4 +1,5 @@
-﻿using AgriNaviApi.Application.DTOs.QualityStandards;
+﻿using AgriNaviApi.Application.DTOs.Colors;
+using AgriNaviApi.Application.DTOs.QualityStandards;
 using AgriNaviApi.Application.Requests.QualityStandards;
 using AgriNaviApi.Infrastructure.Persistence.Entities;
 using AutoMapper;
@@ -20,6 +21,9 @@ namespace AgriNaviApi.Application.Profiles
             CreateMap<QualityStandardEntity, QualityStandardDeleteDto>();
 
             CreateMap<QualityStandardEntity, QualityStandardDetailDto>();
+
+            // 検索結果用
+            CreateMap<QualityStandardEntity, QualityStandardListItemDto>();
             #endregion
 
             #region Request → Entity

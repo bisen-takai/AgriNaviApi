@@ -69,7 +69,11 @@ namespace AgriNaviApi.Application.Services
         /// <exception cref="KeyNotFoundException"></exception>
         public async Task<FieldDetailDto> GetFieldByIdAsync(int id)
         {
-            var field = await _context.Fields.FindAsync(id);
+            var field = await _context.Fields
+                .Include(f => f.Group)
+                .Include(f => f.Color)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(f => f.Id == id);
 
             if (field == null || field.IsDeleted)
             {
@@ -114,9 +118,9 @@ namespace AgriNaviApi.Application.Services
         /// <param name="request"></param>
         /// <returns></returns>
         /// <exception cref="InvalidOperationException"></exception>
-        public async Task<FieldDeleteDto> DeleteFieldAsync(FieldDeleteRequest request)
+        public async Task<FieldDeleteDto> DeleteFieldAsync(int id)
         {
-            var field = await _context.Fields.FindAsync(request.Id);
+            var field = await _context.Fields.FindAsync(id);
 
             if (field == null)
             {
@@ -152,10 +156,18 @@ namespace AgriNaviApi.Application.Services
         public async Task<FieldSearchDto> SearchFieldAsync(FieldSearchRequest request)
         {
             // fieldsテーブルからクエリ可能なIQueryableを取得
-            var query = _context.Fields.AsNoTracking().AsQueryable();
+            var query = _context.Fields
+                .Include(f => f.Group)
+                .Include(f => f.Color)
+                .AsNoTracking().AsQueryable();
 
             // 削除していないデータが対象
             query = query.Where(c => !c.IsDeleted);
+
+            if (request.GroupId != null)
+            {
+                query = query.Where(c => c.GroupId == request.GroupId);
+            }
 
             if (!string.IsNullOrWhiteSpace(request.SearchFieldName))
             {

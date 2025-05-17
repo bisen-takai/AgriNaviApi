@@ -16,6 +16,12 @@ namespace AgriNaviApi.Application.Requests.Crops
         public string? SearchCropName { get; set; }
 
         /// <summary>
+        /// グループID
+        /// </summary>
+        [Display(Name = "グループID")]
+        public int? GroupId { get; set; }
+
+        /// <summary>
         /// 検索一致タイプ
         /// </summary>
         [Display(Name = "検索一致タイプ")]

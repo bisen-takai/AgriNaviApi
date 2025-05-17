@@ -1,4 +1,5 @@
 ﻿using AgriNaviApi.Application.DTOs.ShippingDestinations;
+using AgriNaviApi.Application.DTOs.Units;
 using AgriNaviApi.Application.Requests.ShippingDestinations;
 using AgriNaviApi.Infrastructure.Persistence.Entities;
 using AutoMapper;
@@ -20,6 +21,9 @@ namespace AgriNaviApi.Application.Profiles
             CreateMap<ShippingDestinationEntity, ShippingDestinationDeleteDto>();
 
             CreateMap<ShippingDestinationEntity, ShippingDestinationDetailDto>();
+
+            // 検索結果用
+            CreateMap<ShippingDestinationEntity, ShippingDestinationListItemDto>();
             #endregion
 
             #region Request → Entity

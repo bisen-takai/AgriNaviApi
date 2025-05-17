@@ -34,7 +34,7 @@ namespace AgriNaviApi.Application.Interfaces
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public Task<SeasonCropScheduleDeleteDto> DeleteSeasonCropScheduleAsync(SeasonCropScheduleDeleteRequest request);
+        public Task<SeasonCropScheduleDeleteDto> DeleteSeasonCropScheduleAsync(int id);
 
         /// <summary>
         /// 作付計画テーブルを検索する

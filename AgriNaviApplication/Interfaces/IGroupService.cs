@@ -34,7 +34,7 @@ namespace AgriNaviApi.Application.Interfaces
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public Task<GroupDeleteDto> DeleteGroupAsync(GroupDeleteRequest request);
+        public Task<GroupDeleteDto> DeleteGroupAsync(int id);
 
         /// <summary>
         /// グループテーブルを検索する

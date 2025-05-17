@@ -71,8 +71,8 @@ namespace AgriNaviApi.API.Controllers
         /// </summary>
         /// <param name="request">更新用リクエストデータ</param>
         /// <returns></returns>
-        [HttpPut]
-        public async Task<ActionResult<GroupUpdateDto>> UpdateGroup([FromBody] GroupUpdateRequest request)
+        [HttpPut("{id}")]
+        public async Task<ActionResult<GroupUpdateDto>> UpdateGroup(int id, [FromBody] GroupUpdateRequest request)
         {
             try
             {
@@ -94,12 +94,12 @@ namespace AgriNaviApi.API.Controllers
         /// </summary>
         /// <param name="request">削除用リクエストデータ</param>
         /// <returns></returns>
-        [HttpDelete]
-        public async Task<IActionResult> DeleteGroup([FromBody] GroupDeleteRequest request)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteGroup(int id)
         {
             try
             {
-                var deletedResult = await _groupService.DeleteGroupAsync(request);
+                var deletedResult = await _groupService.DeleteGroupAsync(id);
                 return Ok(deletedResult);
             }
             catch (InvalidOperationException ex)
@@ -121,8 +121,8 @@ namespace AgriNaviApi.API.Controllers
         /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> SearchGroups(
-            [FromQuery] string searchGroupName,
-            [FromQuery] GroupKind groupKind,
+            [FromQuery] string? searchGroupName,
+            [FromQuery] GroupKind? groupKind,
             [FromQuery] SearchMatchType searchMatchType = SearchMatchType.None)
         {
             try

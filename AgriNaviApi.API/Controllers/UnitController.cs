@@ -71,8 +71,8 @@ namespace AgriNaviApi.API.Controllers
         /// </summary>
         /// <param name="request">更新用リクエストデータ</param>
         /// <returns></returns>
-        [HttpPut]
-        public async Task<ActionResult<UnitUpdateDto>> UpdateUnit([FromBody] UnitUpdateRequest request)
+        [HttpPut("{id}")]
+        public async Task<ActionResult<UnitUpdateDto>> UpdateUnit(int id, [FromBody] UnitUpdateRequest request)
         {
             try
             {
@@ -94,12 +94,12 @@ namespace AgriNaviApi.API.Controllers
         /// </summary>
         /// <param name="request">削除用リクエストデータ</param>
         /// <returns></returns>
-        [HttpDelete]
-        public async Task<IActionResult> DeleteUnit([FromBody] UnitDeleteRequest request)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteUnit(int id)
         {
             try
             {
-                var deletedResult = await _unitService.DeleteUnitAsync(request);
+                var deletedResult = await _unitService.DeleteUnitAsync(id);
                 return Ok(deletedResult);
             }
             catch (InvalidOperationException ex)
@@ -121,7 +121,7 @@ namespace AgriNaviApi.API.Controllers
         /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> SearchUnits(
-            [FromQuery] string searchUnitName,
+            [FromQuery] string? searchUnitName,
             [FromQuery] SearchMatchType searchMatchType = SearchMatchType.None)
         {
             try

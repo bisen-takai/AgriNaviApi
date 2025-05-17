@@ -34,7 +34,7 @@ namespace AgriNaviApi.Application.Interfaces
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public Task<UnitDeleteDto> DeleteUnitAsync(UnitDeleteRequest request);
+        public Task<UnitDeleteDto> DeleteUnitAsync(int id);
 
         /// <summary>
         /// 単位テーブルを検索する

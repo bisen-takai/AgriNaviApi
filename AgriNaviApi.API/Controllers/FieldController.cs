@@ -71,8 +71,8 @@ namespace AgriNaviApi.API.Controllers
         /// </summary>
         /// <param name="request">更新用リクエストデータ</param>
         /// <returns></returns>
-        [HttpPut]
-        public async Task<ActionResult<FieldUpdateDto>> UpdateField([FromBody] FieldUpdateRequest request)
+        [HttpPut("{id}")]
+        public async Task<ActionResult<FieldUpdateDto>> UpdateField(int id, [FromBody] FieldUpdateRequest request)
         {
             try
             {
@@ -94,12 +94,12 @@ namespace AgriNaviApi.API.Controllers
         /// </summary>
         /// <param name="request">削除用リクエストデータ</param>
         /// <returns></returns>
-        [HttpDelete]
-        public async Task<IActionResult> DeleteField([FromBody] FieldDeleteRequest request)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteField(int id)
         {
             try
             {
-                var deletedResult = await _fieldService.DeleteFieldAsync(request);
+                var deletedResult = await _fieldService.DeleteFieldAsync(id);
                 return Ok(deletedResult);
             }
             catch (InvalidOperationException ex)
@@ -121,7 +121,8 @@ namespace AgriNaviApi.API.Controllers
         /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> SearchFields(
-            [FromQuery] string searchFieldName,
+            [FromQuery] string? searchFieldName,
+            [FromQuery] int? groupId,
             [FromQuery] SearchMatchType searchMatchType = SearchMatchType.None)
         {
             try
@@ -129,6 +130,7 @@ namespace AgriNaviApi.API.Controllers
                 var request = new FieldSearchRequest
                 {
                     SearchFieldName = searchFieldName,
+                    GroupId = groupId,
                     SearchMatchType = searchMatchType
                 };
 

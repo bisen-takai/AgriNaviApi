@@ -83,7 +83,10 @@ namespace AgriNaviApi.Application.Services
         /// <exception cref="KeyNotFoundException"></exception>
         public async Task<SeasonCropScheduleDetailDto> GetSeasonCropScheduleByIdAsync(int id)
         {
-            var seasonCropSchedule = await _context.SeasonCropSchedules.FindAsync(id);
+            var seasonCropSchedule = await _context.SeasonCropSchedules
+                .Include(s => s.Crop)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(f => f.Id == id);
 
             if (seasonCropSchedule == null || seasonCropSchedule.IsDeleted)
             {
@@ -142,9 +145,9 @@ namespace AgriNaviApi.Application.Services
         /// <param name="request"></param>
         /// <returns></returns>
         /// <exception cref="InvalidOperationException"></exception>
-        public async Task<SeasonCropScheduleDeleteDto> DeleteSeasonCropScheduleAsync(SeasonCropScheduleDeleteRequest request)
+        public async Task<SeasonCropScheduleDeleteDto> DeleteSeasonCropScheduleAsync(int id)
         {
-            var seasonCropSchedule = await _context.SeasonCropSchedules.FindAsync(request.Id);
+            var seasonCropSchedule = await _context.SeasonCropSchedules.FindAsync(id);
 
             if (seasonCropSchedule == null)
             {
@@ -180,7 +183,10 @@ namespace AgriNaviApi.Application.Services
         public async Task<SeasonCropScheduleSearchDto> SearchSeasonCropScheduleAsync(SeasonCropScheduleSearchRequest request)
         {
             // seasonCropSchedulesテーブルからクエリ可能なIQueryableを取得
-            var query = _context.SeasonCropSchedules.AsNoTracking().AsQueryable();
+            var query = _context.SeasonCropSchedules
+                .Include(s => s.Crop)
+                .AsNoTracking()
+                .AsQueryable();
 
             // 削除していないデータが対象
             query = query.Where(c => !c.IsDeleted);
@@ -207,11 +213,12 @@ namespace AgriNaviApi.Application.Services
                         break;
                 }
             }
+            else if (request.CropId != null)
+            {
+                query = query.Where(c => c.CropId == request.CropId);
+            }
             else
             {
-                // 削除していないデータが対象
-                query = query.Where(c => !c.IsDeleted);
-
                 // EndDateが指定されているかどうかで条件を分ける
                 if (request.StartDate != null && request.EndDate != null)
                 {

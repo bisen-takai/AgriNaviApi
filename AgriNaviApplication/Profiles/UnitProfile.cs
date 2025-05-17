@@ -1,4 +1,5 @@
-﻿using AgriNaviApi.Application.DTOs.Units;
+﻿using AgriNaviApi.Application.DTOs.QualityStandards;
+using AgriNaviApi.Application.DTOs.Units;
 using AgriNaviApi.Application.Requests.Units;
 using AgriNaviApi.Infrastructure.Persistence.Entities;
 using AutoMapper;
@@ -20,6 +21,9 @@ namespace AgriNaviApi.Application.Profiles
             CreateMap<UnitEntity, UnitDeleteDto>();
 
             CreateMap<UnitEntity, UnitDetailDto>();
+
+            // 検索結果用
+            CreateMap<UnitEntity, UnitListItemDto>();
             #endregion
 
             #region Request → Entity

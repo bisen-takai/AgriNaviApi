@@ -71,8 +71,8 @@ namespace AgriNaviApi.API.Controllers
         /// </summary>
         /// <param name="request">更新用リクエストデータ</param>
         /// <returns></returns>
-        [HttpPut]
-        public async Task<ActionResult<CropUpdateDto>> UpdateCrop([FromBody] CropUpdateRequest request)
+        [HttpPut("{id}")]
+        public async Task<ActionResult<CropUpdateDto>> UpdateCrop(int id, [FromBody] CropUpdateRequest request)
         {
             try
             {
@@ -94,12 +94,12 @@ namespace AgriNaviApi.API.Controllers
         /// </summary>
         /// <param name="request">削除用リクエストデータ</param>
         /// <returns></returns>
-        [HttpDelete]
-        public async Task<IActionResult> DeleteCrop([FromBody] CropDeleteRequest request)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteCrop(int id)
         {
             try
             {
-                var deletedResult = await _cropService.DeleteCropAsync(request);
+                var deletedResult = await _cropService.DeleteCropAsync(id);
                 return Ok(deletedResult);
             }
             catch (InvalidOperationException ex)
@@ -121,7 +121,8 @@ namespace AgriNaviApi.API.Controllers
         /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> SearchCrops(
-            [FromQuery] string searchCropName,
+            [FromQuery] string? searchCropName,
+            [FromQuery] int? groupId,
             [FromQuery] SearchMatchType searchMatchType = SearchMatchType.None)
         {
             try
@@ -129,6 +130,7 @@ namespace AgriNaviApi.API.Controllers
                 var request = new CropSearchRequest
                 {
                     SearchCropName = searchCropName,
+                    GroupId = groupId,
                     SearchMatchType = searchMatchType
                 };
 

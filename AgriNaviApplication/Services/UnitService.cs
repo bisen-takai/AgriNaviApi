@@ -114,9 +114,9 @@ namespace AgriNaviApi.Application.Services
         /// <param name="request"></param>
         /// <returns></returns>
         /// <exception cref="InvalidOperationException"></exception>
-        public async Task<UnitDeleteDto> DeleteUnitAsync(UnitDeleteRequest request)
+        public async Task<UnitDeleteDto> DeleteUnitAsync(int id)
         {
-            var unit = await _context.Units.FindAsync(request.Id);
+            var unit = await _context.Units.FindAsync(id);
 
             if (unit == null)
             {

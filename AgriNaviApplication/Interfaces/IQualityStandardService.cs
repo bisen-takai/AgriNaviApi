@@ -34,7 +34,7 @@ namespace AgriNaviApi.Application.Interfaces
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public Task<QualityStandardDeleteDto> DeleteQualityStandardAsync(QualityStandardDeleteRequest request);
+        public Task<QualityStandardDeleteDto> DeleteQualityStandardAsync(int id);
 
         /// <summary>
         /// 品質・規格名テーブルを検索する

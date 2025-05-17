@@ -64,8 +64,8 @@ namespace AgriNaviApi.API.Controllers
         /// </summary>
         /// <param name="request">更新用リクエストデータ</param>
         /// <returns></returns>
-        [HttpPut]
-        public async Task<ActionResult<ShipmentRecordDetailUpdateDto>> UpdateShipmentRecordDetail([FromBody] ShipmentRecordDetailUpdateRequest request)
+        [HttpPut("{id}")]
+        public async Task<ActionResult<ShipmentRecordDetailUpdateDto>> UpdateShipmentRecordDetail(int id, [FromBody] ShipmentRecordDetailUpdateRequest request)
         {
             try
             {
@@ -87,7 +87,7 @@ namespace AgriNaviApi.API.Controllers
         /// </summary>
         /// <param name="request">削除用リクエストデータ</param>
         /// <returns></returns>
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteShipmentRecordDetail(int id)
         {
             try

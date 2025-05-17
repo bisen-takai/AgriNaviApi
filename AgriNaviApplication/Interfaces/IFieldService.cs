@@ -34,7 +34,7 @@ namespace AgriNaviApi.Application.Interfaces
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public Task<FieldDeleteDto> DeleteFieldAsync(FieldDeleteRequest request);
+        public Task<FieldDeleteDto> DeleteFieldAsync(int id);
 
         /// <summary>
         /// 圃場テーブルを検索する

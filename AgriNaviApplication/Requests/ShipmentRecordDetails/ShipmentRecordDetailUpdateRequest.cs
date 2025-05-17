@@ -9,11 +9,17 @@ namespace AgriNaviApi.Application.Requests.ShipmentRecordDetails
     public class ShipmentRecordDetailUpdateRequest
     {
         /// <summary>
+        /// 出荷記録詳細ID
+        /// </summary>
+        [Display(Name = "出荷記録詳細ID")]
+        [Required(ErrorMessageResourceName = nameof(CommonValidationMessages.RequiredMessage), ErrorMessageResourceType = typeof(CommonValidationMessages))]
+        public int Id { get; set; }
+
+        /// <summary>
         /// 出荷記録ID
         /// </summary>
         [Display(Name = "出荷記録ID")]
-        [Required(ErrorMessageResourceName = nameof(CommonValidationMessages.RequiredMessage), ErrorMessageResourceType = typeof(CommonValidationMessages))]
-        public int Id { get; set; }
+        public int ShipmentRecordId { get; set; }
 
         /// <summary>
         /// 出荷先ID

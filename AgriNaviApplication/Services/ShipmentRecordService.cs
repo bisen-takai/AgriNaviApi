@@ -60,7 +60,12 @@ namespace AgriNaviApi.Application.Services
         /// <exception cref="KeyNotFoundException"></exception>
         public async Task<ShipmentRecordDetailDto> GetShipmentRecordByIdAsync(int id)
         {
-            var shipmentRecord = await _context.ShipmentRecords.FindAsync(id);
+            var shipmentRecord = await _context.ShipmentRecords
+                .Include(f => f.SeasonCropSchedule)
+                .Include(f => f.Field)
+                .Include(f => f.Crop)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(f => f.Id == id);
 
             if (shipmentRecord == null || shipmentRecord.IsDeleted)
             {

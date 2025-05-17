@@ -71,8 +71,8 @@ namespace AgriNaviApi.API.Controllers
         /// </summary>
         /// <param name="request">更新用リクエストデータ</param>
         /// <returns></returns>
-        [HttpPut]
-        public async Task<ActionResult<SeasonCropScheduleUpdateDto>> UpdateSeasonCropSchedule([FromBody] SeasonCropScheduleUpdateRequest request)
+        [HttpPut("{id}")]
+        public async Task<ActionResult<SeasonCropScheduleUpdateDto>> UpdateSeasonCropSchedule(int id, [FromBody] SeasonCropScheduleUpdateRequest request)
         {
             try
             {
@@ -94,12 +94,12 @@ namespace AgriNaviApi.API.Controllers
         /// </summary>
         /// <param name="request">削除用リクエストデータ</param>
         /// <returns></returns>
-        [HttpDelete]
-        public async Task<IActionResult> DeleteSeasonCropSchedule([FromBody] SeasonCropScheduleDeleteRequest request)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteSeasonCropSchedule(int id)
         {
             try
             {
-                var deletedResult = await _seasonCropScheduleService.DeleteSeasonCropScheduleAsync(request);
+                var deletedResult = await _seasonCropScheduleService.DeleteSeasonCropScheduleAsync(id);
                 return Ok(deletedResult);
             }
             catch (InvalidOperationException ex)
@@ -121,7 +121,8 @@ namespace AgriNaviApi.API.Controllers
         /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> SearchSeasonCropSchedules(
-            [FromQuery] string searchSeasonCropScheduleName,
+            [FromQuery] string? searchSeasonCropScheduleName,
+            [FromQuery] int? cropId,
             [FromQuery] SearchMatchType searchMatchType = SearchMatchType.None,
             [FromQuery] DateTime? startDate = null,
             [FromQuery] DateTime? endDate = null)
@@ -131,6 +132,7 @@ namespace AgriNaviApi.API.Controllers
                 var request = new SeasonCropScheduleSearchRequest
                 {
                     SearchSeasonCropScheduleName = searchSeasonCropScheduleName,
+                    CropId = cropId,
                     SearchMatchType = searchMatchType,
                     StartDate = startDate,
                     EndDate = endDate

@@ -71,8 +71,8 @@ namespace AgriNaviApi.API.Controllers
         /// </summary>
         /// <param name="request">更新用リクエストデータ</param>
         /// <returns></returns>
-        [HttpPut]
-        public async Task<ActionResult<ShippingDestinationUpdateDto>> UpdateShippingDestination([FromBody] ShippingDestinationUpdateRequest request)
+        [HttpPut("{id}")]
+        public async Task<ActionResult<ShippingDestinationUpdateDto>> UpdateShippingDestination(int id, [FromBody] ShippingDestinationUpdateRequest request)
         {
             try
             {
@@ -94,12 +94,12 @@ namespace AgriNaviApi.API.Controllers
         /// </summary>
         /// <param name="request">削除用リクエストデータ</param>
         /// <returns></returns>
-        [HttpDelete]
-        public async Task<IActionResult> DeleteShippingDestination([FromBody] ShippingDestinationDeleteRequest request)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteShippingDestination(int id)
         {
             try
             {
-                var deletedResult = await _shippingDestinationService.DeleteShippingDestinationAsync(request);
+                var deletedResult = await _shippingDestinationService.DeleteShippingDestinationAsync(id);
                 return Ok(deletedResult);
             }
             catch (InvalidOperationException ex)
@@ -121,7 +121,7 @@ namespace AgriNaviApi.API.Controllers
         /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> SearchShippingDestinations(
-            [FromQuery] string searchShippingDestinationName,
+            [FromQuery] string? searchShippingDestinationName,
             [FromQuery] SearchMatchType searchMatchType = SearchMatchType.None)
         {
             try

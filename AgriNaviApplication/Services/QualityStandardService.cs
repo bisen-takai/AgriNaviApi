@@ -114,9 +114,9 @@ namespace AgriNaviApi.Application.Services
         /// <param name="request"></param>
         /// <returns></returns>
         /// <exception cref="InvalidOperationException"></exception>
-        public async Task<QualityStandardDeleteDto> DeleteQualityStandardAsync(QualityStandardDeleteRequest request)
+        public async Task<QualityStandardDeleteDto> DeleteQualityStandardAsync(int id)
         {
-            var qualityStandard = await _context.QualityStandards.FindAsync(request.Id);
+            var qualityStandard = await _context.QualityStandards.FindAsync(id);
 
             if (qualityStandard == null)
             {

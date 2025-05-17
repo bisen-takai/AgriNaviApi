@@ -23,7 +23,7 @@ namespace AgriNaviApi.API.Controllers
         /// </summary>
         /// <param name="request">登録用リクエストデータ</param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpPost("Create")]
         public async Task<ActionResult<UserCreateDto>> CreateUser([FromBody] UserCreateRequest request)
         {
             try
@@ -95,8 +95,8 @@ namespace AgriNaviApi.API.Controllers
         /// </summary>
         /// <param name="request">更新用リクエストデータ</param>
         /// <returns></returns>
-        [HttpPut]
-        public async Task<ActionResult<UserUpdateDto>> UpdateUser([FromBody] UserUpdateRequest request)
+        [HttpPut("{id}")]
+        public async Task<ActionResult<UserUpdateDto>> UpdateUser(int id, [FromBody] UserUpdateRequest request)
         {
             try
             {
@@ -118,12 +118,12 @@ namespace AgriNaviApi.API.Controllers
         /// </summary>
         /// <param name="request">削除用リクエストデータ</param>
         /// <returns></returns>
-        [HttpDelete]
-        public async Task<IActionResult> DeleteUser([FromBody] UserDeleteRequest request)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteUser(int id)
         {
             try
             {
-                var deletedResult = await _userService.DeleteUserAsync(request);
+                var deletedResult = await _userService.DeleteUserAsync(id);
                 return Ok(deletedResult);
             }
             catch (InvalidOperationException ex)

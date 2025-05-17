@@ -47,7 +47,7 @@ namespace AgriNaviApi.Application.Interfaces
         /// <param name="request"></param>
         /// <returns></returns>
         /// <exception cref="InvalidOperationException"></exception>
-        public Task<UserDeleteDto> DeleteUserAsync(UserDeleteRequest request);
+        public Task<UserDeleteDto> DeleteUserAsync(int id);
 
         /// <summary>
         /// ユーザテーブルを検索する

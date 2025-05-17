@@ -114,9 +114,9 @@ namespace AgriNaviApi.Application.Services
         /// <param name="request"></param>
         /// <returns></returns>
         /// <exception cref="InvalidOperationException"></exception>
-        public async Task<ShippingDestinationDeleteDto> DeleteShippingDestinationAsync(ShippingDestinationDeleteRequest request)
+        public async Task<ShippingDestinationDeleteDto> DeleteShippingDestinationAsync(int id)
         {
-            var shippingDestination = await _context.ShippingDestinations.FindAsync(request.Id);
+            var shippingDestination = await _context.ShippingDestinations.FindAsync(id);
 
             if (shippingDestination == null)
             {

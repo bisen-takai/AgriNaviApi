@@ -114,9 +114,9 @@ namespace AgriNaviApi.Application.Services
         /// <param name="request"></param>
         /// <returns></returns>
         /// <exception cref="InvalidOperationException"></exception>
-        public async Task<GroupDeleteDto> DeleteGroupAsync(GroupDeleteRequest request)
+        public async Task<GroupDeleteDto> DeleteGroupAsync(int id)
         {
-            var group = await _context.Groups.FindAsync(request.Id);
+            var group = await _context.Groups.FindAsync(id);
 
             if (group == null)
             {
@@ -157,26 +157,30 @@ namespace AgriNaviApi.Application.Services
             // 削除していないデータが対象
             query = query.Where(c => !c.IsDeleted);
 
+            if (request.Kind != null)
+            {
+                query = query.Where(c => c.Kind == request.Kind);
+            }
+
             if (!string.IsNullOrWhiteSpace(request.SearchGroupName))
             {
                 switch (request.SearchMatchType)
                 {
                     case SearchMatchType.EXACT:
-                        query = query.Where(c => c.Kind == request.Kind && c.Name == request.SearchGroupName);
+                        query = query.Where(c => c.Name == request.SearchGroupName);
                         break;
                     case SearchMatchType.PREFIX:
-                        query = query.Where(c => c.Kind == request.Kind && c.Name.StartsWith(request.SearchGroupName));
+                        query = query.Where(c => c.Name.StartsWith(request.SearchGroupName));
                         break;
                     case SearchMatchType.SUFFIX:
-                        query = query.Where(c => c.Kind == request.Kind && c.Name.EndsWith(request.SearchGroupName));
+                        query = query.Where(c => c.Name.EndsWith(request.SearchGroupName));
                         break;
                     case SearchMatchType.PARTIAL:
-                        query = query.Where(c => c.Kind == request.Kind && c.Name.Contains(request.SearchGroupName));
+                        query = query.Where(c => c.Name.Contains(request.SearchGroupName));
                         break;
                     case SearchMatchType.None:
                     default:
                         // 全件検索とする
-                        query = query.Where(c => c.Kind == request.Kind);
                         break;
                 }
             }

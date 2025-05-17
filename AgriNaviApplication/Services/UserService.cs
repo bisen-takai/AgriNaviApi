@@ -146,9 +146,9 @@ namespace AgriNaviApi.Application.Services
         /// <param name="request"></param>
         /// <returns></returns>
         /// <exception cref="InvalidOperationException"></exception>
-        public async Task<UserDeleteDto> DeleteUserAsync(UserDeleteRequest request)
+        public async Task<UserDeleteDto> DeleteUserAsync(int id)
         {
-            var user = await _context.Users.FindAsync(request.Id);
+            var user = await _context.Users.FindAsync(id);
 
             if (user == null)
             {

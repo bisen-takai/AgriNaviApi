@@ -34,7 +34,7 @@ namespace AgriNaviApi.Application.Interfaces
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public Task<CropDeleteDto> DeleteCropAsync(CropDeleteRequest request);
+        public Task<CropDeleteDto> DeleteCropAsync(int id);
 
         /// <summary>
         /// 作付テーブルを検索する
