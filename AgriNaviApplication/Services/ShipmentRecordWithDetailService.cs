@@ -114,7 +114,15 @@ namespace AgriNaviApi.Application.Services
         public async Task<ShipmentRecordWithDetailDetailDto> GetShipmentRecordByIdAsync(int id)
         {
             var shipmentRecord = await _context.ShipmentRecords
+                .Include(r => r.Field)
+                .Include(r => r.Crop)
+                .Include(r => r.SeasonCropSchedule)
                 .Include(r => r.Details)
+                    .ThenInclude(d => d.ShippingDestination)
+                .Include(r => r.Details)
+                    .ThenInclude(d => d.QualityStandard)
+                .Include(r => r.Details)
+                    .ThenInclude(d => d.Unit)
                 .FirstOrDefaultAsync(r => r.Id == id && !r.IsDeleted);
 
             if (shipmentRecord == null)
@@ -162,7 +170,6 @@ namespace AgriNaviApi.Application.Services
 
                 shipmentRecord.LastUpdatedAt = _dateTimeProvider.UtcNow;
 
-                _context.ShipmentRecords.Add(shipmentRecord);
                 await _context.SaveChangesAsync();
 
                 foreach (var existingDetail in shipmentRecord.Details.ToList())
@@ -276,8 +283,10 @@ namespace AgriNaviApi.Application.Services
 
             // 削除していないデータが対象
             var shipmentRecord = _context.ShipmentRecords
-                .AsNoTracking()
+                .Include(r => r.Field)
+                .Include(r => r.Crop)
                 .Include(r => r.Details)
+                .AsNoTracking()
                 .Where(r => !r.IsDeleted);
 
             if (request.SeasonCropScheduleId > 0)
