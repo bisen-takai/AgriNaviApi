@@ -11,6 +11,11 @@
         public int Id { get; set; }
 
         /// <summary>
+        /// 出荷記録ID
+        /// </summary>
+        public int ShipmentRecordId { get; set; }
+
+        /// <summary>
         /// 削除成功か
         /// </summary>
         public bool IsDeleted { get; set; }

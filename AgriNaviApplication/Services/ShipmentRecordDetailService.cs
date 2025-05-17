@@ -7,6 +7,7 @@ using AgriNaviApi.Infrastructure.Persistence.Contexts;
 using AgriNaviApi.Infrastructure.Persistence.Entities;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using System.Drawing;
 
 namespace AgriNaviApi.Application.Services
 {
@@ -99,7 +100,7 @@ namespace AgriNaviApi.Application.Services
         }
 
         /// <summary>
-        /// 出荷記録詳細テーブルから削除する※削除フラグをtrueにするのみで、実際は削除しない
+        /// 出荷記録詳細テーブルから削除する
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
@@ -114,13 +115,13 @@ namespace AgriNaviApi.Application.Services
                 throw new InvalidOperationException(message);
             }
 
-            shipmentRecordDetail.LastUpdatedAt = _dateTimeProvider.UtcNow;
-
+            _context.ShipmentRecordDetails.Remove(shipmentRecordDetail);
             await _context.SaveChangesAsync();
 
             return new ShipmentRecordDetailDeleteDto
             {
                 Id = shipmentRecordDetail.Id,
+                ShipmentRecordId = shipmentRecordDetail.ShipmentRecordId,
                 IsDeleted = true,
                 Message = string.Format(CommonMessages.DeleteMessage, TableName)
             };
