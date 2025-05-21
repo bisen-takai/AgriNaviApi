@@ -47,7 +47,7 @@ namespace AgriNaviApi.API.Controllers
         /// </summary>
         /// <param name="request">登録用リクエストデータ</param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpPost("Login")]
         public async Task<ActionResult<UserLoginDto>> Login([FromBody] UserLoginRequest request)
         {
             try
@@ -145,7 +145,7 @@ namespace AgriNaviApi.API.Controllers
         /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> SearchUsers(
-            [FromQuery] string searchUserName,
+            [FromQuery] string? searchUserName,
             [FromQuery] SearchMatchType searchMatchType = SearchMatchType.None)
         {
             try

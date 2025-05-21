@@ -75,7 +75,10 @@ namespace AgriNaviApi.Application.Services
         /// <exception cref="KeyNotFoundException"></exception>
         public async Task<UserDetailDto> GetUserByIdAsync(int id)
         {
-            var user = await _context.Users.FindAsync(id);
+            var user = await _context.Users
+                .Include(f => f.Color)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(f => f.Id == id);
 
             if (user == null || user.IsDeleted)
             {
@@ -184,7 +187,9 @@ namespace AgriNaviApi.Application.Services
         public async Task<UserSearchDto> SearchUserAsync(UserSearchRequest request)
         {
             // usersテーブルからクエリ可能なIQueryableを取得
-            var query = _context.Users.AsNoTracking().AsQueryable();
+            var query = _context.Users
+                .Include(f => f.Color)
+                .AsNoTracking().AsQueryable();
 
             // 削除していないデータが対象
             query = query.Where(c => !c.IsDeleted);

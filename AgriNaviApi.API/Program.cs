@@ -1,5 +1,6 @@
 using AgriNaviApi.Application.Extensions;
 using AgriNaviApi.Common.Extensions;
+using AgriNaviApi.Common.Settings;
 using AgriNaviApi.Infrastructure.Persistence.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
@@ -36,6 +37,8 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseMySql(connecti
 builder.Services.AddCommonServices();
 // ApplicationëwÇÃÉTÅ[ÉrÉXÇÃìoò^
 builder.Services.AddApplicationServices();
+
+builder.Services.Configure<SecuritySetting>(builder.Configuration.GetSection("SecuritySettings"));
 
 var app = builder.Build();
 
