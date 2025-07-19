@@ -7,18 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.13" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.13">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AgriNaviApi.Common\AgriNaviApi.Common.csproj" />
+    <ProjectReference Include="..\AgriNaviApi.Application\AgriNaviApi.Application.csproj" />
     <ProjectReference Include="..\AgriNaviApi.Infrastructure\AgriNaviApi.Infrastructure.csproj" />
-    <ProjectReference Include="..\AgriNaviApplication\AgriNaviApi.Application.csproj" />
+    <ProjectReference Include="..\AgriNaviApi.Shared\AgriNaviApi.Shared.csproj" />
   </ItemGroup>
 
 </Project>

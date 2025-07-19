@@ -1,69 +1,49 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
+using AgriNaviApi.Infrastructure.Persistence.Entities.Base;
+using AgriNaviApi.Shared.ValidationRules;
+using AgriNaviApi.Infrastructure.Interfaces;
 
 namespace AgriNaviApi.Infrastructure.Persistence.Entities
 {
     /// <summary>
-    /// Colorsテーブル
+    /// カラーテーブル
     /// </summary>
     [Table("colors")]
     [Index(nameof(Name), IsUnique = true)]
-    public class ColorEntity
+    public class ColorEntity : BaseEntity
     {
-        /// <summary>
-        /// カラーID(自動インクリメントID)
-        /// </summary>
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("color_id")]
-        public int Id { get; set; }
-
-        /// <summary>
-        /// カラーUUID
-        /// </summary>
-        [Column("color_uuid")]
-        public Guid Uuid { get; set; }
-
         /// <summary>
         /// カラー名
         /// </summary>
         [Column("color_name")]
         [Required]
-        [StringLength(20)]
-        public string Name { get; set; } = string.Empty;
+        [MaxLength(ColorValidationRules.NameMax)]
+        public string Name { get; set; } = null!;
 
         /// <summary>
         /// Red値
         /// </summary>
-        [Column("color_red_value")]
-        [Range(0, 255)]
-        public int RedValue { get; set; }
+        [Column("color_red")]
+        public byte Red { get; set; }
 
         /// <summary>
         /// Green値
         /// </summary>
-        [Column("color_green_value")]
-        [Range(0, 255)]
-        public int GreenValue { get; set; }
+        [Column("color_green")]
+        public byte Green { get; set; }
 
         /// <summary>
         /// Blue値
         /// </summary>
-        [Column("color_blue_value")]
-        [Range(0, 255)]
-        public int BlueValue { get; set; }
+        [Column("color_blue")]
+        public byte Blue { get; set; }
 
         /// <summary>
-        /// 登録日時
+        /// EF Coreマッピング用
         /// </summary>
-        [Column("created_at")]
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-
-        /// <summary>
-        /// 最終更新日時
-        /// </summary>
-        [Column("last_updated_at")]
-        public DateTime LastUpdatedAt { get; set; } = DateTime.UtcNow;
+        [Obsolete("このコンストラクタはEF Coreが内部的に使用します。アプリケーションコードでの使用は避けてください。", error: false)]
+        public ColorEntity() { }
     }
 }

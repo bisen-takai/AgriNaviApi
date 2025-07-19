@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AgriNaviApi.Common\AgriNaviApi.Common.csproj" />
+    <ProjectReference Include="..\AgriNaviApi.Common\AgriNaviApi.Shared.csproj" />
     <ProjectReference Include="..\AgriNaviApplication\AgriNaviApi.Application.csproj" />
   </ItemGroup>
 

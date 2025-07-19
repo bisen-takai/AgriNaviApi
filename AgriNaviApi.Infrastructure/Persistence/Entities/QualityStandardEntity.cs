@@ -1,52 +1,31 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using AgriNaviApi.Infrastructure.Interfaces;
+using AgriNaviApi.Infrastructure.Persistence.Entities.Base;
+using AgriNaviApi.Shared.ValidationRules;
+using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AgriNaviApi.Infrastructure.Persistence.Entities
 {
     /// <summary>
-    /// 品質・規格名テーブル
+    /// 品質・規格テーブル
     /// </summary>
     [Table("quality_standards")]
-    public class QualityStandardEntity
+    [Index(nameof(Name), IsUnique = true)]
+    public class QualityStandardEntity : BaseEntity
     {
-        /// <summary>
-        /// 品質・規格名ID(自動インクリメントID)
-        /// </summary>
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("quality_standard_id")]
-        public int Id { get; set; }
-
-        /// <summary>
-        /// 品質・規格名UUID
-        /// </summary>
-        [Column("quality_standard_uuid")]
-        public Guid Uuid { get; set; }
-
         /// <summary>
         /// 品質・規格名
         /// </summary>
         [Column("quality_standard_name")]
         [Required]
-        [StringLength(20)]
-        public string Name { get; set; } = string.Empty;
+        [MaxLength(QualityStandardValidationRules.NameMax)]
+        public string Name { get; set; } = null!;
 
         /// <summary>
-        /// 削除フラグ
+        /// EF Coreマッピング用
         /// </summary>
-        [Column("quality_standard_delete_flg")]
-        public bool IsDeleted { get; set; } = false;
-
-        /// <summary>
-        /// 登録日時
-        /// </summary>
-        [Column("created_at")]
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-
-        /// <summary>
-        /// 最終更新日時
-        /// </summary>
-        [Column("last_updated_at")]
-        public DateTime LastUpdatedAt { get; set; } = DateTime.UtcNow;
+        [Obsolete("このコンストラクタはEF Coreが内部的に使用します。アプリケーションコードでの使用は避けてください。", error: false)]
+        public QualityStandardEntity() { }
     }
 }

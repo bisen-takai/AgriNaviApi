@@ -1,5 +1,5 @@
 using AgriNaviApi.API.Controllers;
-using AgriNaviApi.Application.DTOs.Colors;
+using AgriNaviApi.Application.Responses.Colors;
 using AgriNaviApi.Application.Interfaces;
 using AgriNaviApi.Application.Requests.Colors;
 using AgriNaviApi.Common.Enums;
@@ -146,7 +146,7 @@ namespace AgriNaviApi.API.UnitTests
                 Name = "Updated Blue",
                 // サービス層でテスト済みなのでその他省略
             };
-            var updateDto = new ColorUpdateDto
+            var updateDto = new ColorUpdateResponse
             {
                 Id = 1,
                 Name = "Updated Blue"
@@ -160,7 +160,7 @@ namespace AgriNaviApi.API.UnitTests
             var actionResult = await _controller.UpdateColor(1, updateRequest);
 
             var okResult = Assert.IsType<OkObjectResult>(actionResult.Result);
-            var returnedDto = Assert.IsType<ColorUpdateDto>(okResult.Value);
+            var returnedDto = Assert.IsType<ColorUpdateResponse>(okResult.Value);
             Assert.Equal("Updated Blue", returnedDto.Name);
         }
 

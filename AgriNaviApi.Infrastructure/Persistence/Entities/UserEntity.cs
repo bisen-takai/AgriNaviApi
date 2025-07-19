@@ -1,6 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using AgriNaviApi.Common.Enums;
+using AgriNaviApi.Shared.Enums;
+using AgriNaviApi.Infrastructure.Persistence.Entities.Base;
+using Microsoft.EntityFrameworkCore;
+using AgriNaviApi.Shared.ValidationRules;
 
 namespace AgriNaviApi.Infrastructure.Persistence.Entities
 {
@@ -8,28 +11,23 @@ namespace AgriNaviApi.Infrastructure.Persistence.Entities
     /// ユーザテーブル
     /// </summary>
     [Table("users")]
-    public class UserEntity
+    [Index(nameof(LoginId), IsUnique = true)]
+    [Index(nameof(Uuid), IsUnique = true)]
+    [Index(nameof(Email), IsUnique = true)]
+    public class UserEntity : BaseEntity, IHasUuid, ISoftDelete
     {
         /// <summary>
-        /// ユーザID(自動インクリメントID)
-        /// </summary>
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("user_id")]
-        public int Id { get; set; }
-
-        /// <summary>
-        /// ユーザUUID
+        /// ユーザUUID（アプリ側から直接設定不可。SaveChanges内で自動設定）
         /// </summary>
         [Column("user_uuid")]
-        public Guid Uuid { get; set; }
+        public Guid Uuid { get; private set; }
 
         /// <summary>
         /// ログインID
         /// </summary>
         [Column("user_login_id")]
         [Required]
-        [StringLength(20)]
+        [MaxLength(UserValidationRules.LoginIdMax)]
         public string LoginId { get; set; } = string.Empty;
 
         /// <summary>
@@ -37,7 +35,7 @@ namespace AgriNaviApi.Infrastructure.Persistence.Entities
         /// </summary>
         [Column("user_password")]
         [Required]
-        [StringLength(64, MinimumLength = 64)]
+        [StringLength(UserValidationRules.PasswordHashLen, MinimumLength = UserValidationRules.PasswordHashLen)]
         public string PasswordHash { get; set; } = string.Empty;
 
         /// <summary>
@@ -45,22 +43,22 @@ namespace AgriNaviApi.Infrastructure.Persistence.Entities
         /// </summary>
         [Column("user_salt")]
         [Required]
-        [StringLength(24, MinimumLength = 24)]
+        [StringLength(UserValidationRules.SaltLen, MinimumLength = UserValidationRules.SaltLen)]
         public string Salt { get; set; } = string.Empty;
 
         /// <summary>
         /// 氏名
         /// </summary>
         [Column("user_full_name")]
-        [MaxLength(20)]
+        [MaxLength(UserValidationRules.FullNameMax)]
         public string? FullName { get; set; }
 
         /// <summary>
         /// 電話番号
         /// </summary>
         [Column("user_phone_number")]
-        [RegularExpression(@"^\d{10,11}$")]
-        [StringLength(11)]
+        [RegularExpression(UserValidationRules.PhoneNumberPattern)]
+        [MaxLength(UserValidationRules.PhoneNumMax)]
         public string? PhoneNumber { get; set; }
 
         /// <summary>
@@ -68,13 +66,14 @@ namespace AgriNaviApi.Infrastructure.Persistence.Entities
         /// </summary>
         [Column("user_email")]
         [EmailAddress]
+        [MaxLength(CommonValidationRules.EmailMax)]
         public string? Email { get; set; }
 
         /// <summary>
         /// 住所
         /// </summary>
         [Column("user_address")]
-        [StringLength(30)]
+        [MaxLength(UserValidationRules.AddressMax)]
         public string? Address { get; set; }
 
         /// <summary>
@@ -100,34 +99,26 @@ namespace AgriNaviApi.Infrastructure.Persistence.Entities
         /// 備考
         /// </summary>
         [Column("user_remark")]
-        [StringLength(200)]
+        [MaxLength(CommonValidationRules.RemarkMax)]
         public string? Remark { get; set; }
 
         /// <summary>
         /// 削除フラグ
         /// </summary>
-        [Column("user_delete_flg")]
+        [Column("delete_flg")]
         public bool IsDeleted { get; set; } = false;
 
         /// <summary>
-        /// 登録日時
+        /// 削除日時（UTC）
         /// </summary>
-        [Column("created_at")]
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-
-        /// <summary>
-        /// 最終更新日時
-        /// </summary>
-        [Column("last_updated_at")]
-        public DateTime LastUpdatedAt { get; set; } = DateTime.UtcNow;
-
+        [Column("deleted_at")]
+        public DateTime? DeletedAt { get; set; }
 
         /// <summary>
         /// EF Coreマッピング用
         /// </summary>
-        public UserEntity()
-        {
-        }
+        [Obsolete("このコンストラクタはEF Coreが内部的に使用します。アプリケーションコードでの使用は避けてください。", error: false)]
+        public UserEntity() { }
 
         /// <summary>
         /// 非null許容型の外部キーのエンティティの初期値を設定する
@@ -137,6 +128,7 @@ namespace AgriNaviApi.Infrastructure.Persistence.Entities
         public UserEntity(ColorEntity color)
         {
             Color = color ?? throw new ArgumentNullException(nameof(color));
+            ColorId = Color.Id;
         }
     }
 }

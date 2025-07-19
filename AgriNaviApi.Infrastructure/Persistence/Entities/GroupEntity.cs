@@ -1,36 +1,27 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using AgriNaviApi.Common.Enums;
+using AgriNaviApi.Shared.Enums;
+using Microsoft.EntityFrameworkCore;
+using AgriNaviApi.Infrastructure.Persistence.Entities.Base;
+using AgriNaviApi.Shared.ValidationRules;
+using AgriNaviApi.Infrastructure.Interfaces;
 
 namespace AgriNaviApi.Infrastructure.Persistence.Entities
 {
     /// <summary>
-    /// グループ名テーブル
+    /// グループテーブル
     /// </summary>
-    [Table("groups")]
-    public class GroupEntity
+    [Table("groups_mst")]
+    [Index(nameof(Name), IsUnique = true)]
+    public class GroupEntity : BaseEntity
     {
-        /// <summary>
-        /// グループ名ID(自動インクリメントID)
-        /// </summary>
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("group_id")]
-        public int Id { get; set; }
-
-        /// <summary>
-        /// グループ名UUID
-        /// </summary>
-        [Column("group_uuid")]
-        public Guid Uuid { get; set; }
-
         /// <summary>
         /// グループ名
         /// </summary>
         [Column("group_name")]
         [Required]
-        [StringLength(20)]
-        public string Name { get; set; } = string.Empty;
+        [MaxLength(GroupValidationRules.NameMax)]
+        public string Name { get; set; } = null!;
 
         /// <summary>
         /// グループ種別
@@ -40,21 +31,9 @@ namespace AgriNaviApi.Infrastructure.Persistence.Entities
         public GroupKind Kind { get; set; }
 
         /// <summary>
-        /// 削除フラグ
+        /// EF Coreマッピング用
         /// </summary>
-        [Column("group_delete_flg")]
-        public bool IsDeleted { get; set; } = false;
-
-        /// <summary>
-        /// 登録日時
-        /// </summary>
-        [Column("created_at")]
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-
-        /// <summary>
-        /// 最終更新日時
-        /// </summary>
-        [Column("last_updated_at")]
-        public DateTime LastUpdatedAt { get; set; } = DateTime.UtcNow;
+        [Obsolete("このコンストラクタはEF Coreが内部的に使用します。アプリケーションコードでの使用は避けてください。", error: false)]
+        public GroupEntity() { }
     }
 }
