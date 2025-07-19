@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -19,6 +19,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AgriNaviApi.API\AgriNaviApi.API.csproj" />
+    <ProjectReference Include="..\AgriNaviApi.Application\AgriNaviApi.Application.csproj" />
+    <ProjectReference Include="..\AgriNaviApi.Infrastructure\AgriNaviApi.Infrastructure.csproj" />
+    <ProjectReference Include="..\AgriNaviApi.Shared\AgriNaviApi.Shared.csproj" />
     <ProjectReference Include="..\AgriNaviApplication\AgriNaviApi.Application.csproj" />
   </ItemGroup>
 
